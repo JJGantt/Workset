@@ -16,7 +16,7 @@ struct WatchHomeView: View {
                     Label("Record a set", systemImage: "waveform.path.ecg")
                 }
             }
-            .navigationTitle("Workset")
+            .navigationTitle("Watchset")
         }
     }
 }

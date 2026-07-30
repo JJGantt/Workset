@@ -41,8 +41,14 @@ final class CaptureManager: ObservableObject {
             lastFailure = "device motion unavailable"
             return
         }
-        guard await keepAlive.requestAuthorization() else { return }
+        // Report WHY, rather than returning quietly. A silent failure here looks
+        // exactly like a dead button: nothing starts and nothing is said.
+        guard await keepAlive.requestAuthorization() else {
+            lastFailure = keepAlive.lastFailure ?? "health authorization refused"
+            return
+        }
         await keepAlive.start()
+        if let f = keepAlive.lastFailure { lastFailure = f }
 
         lock.withLock { samples.removeAll() }
         sampleCount = 0

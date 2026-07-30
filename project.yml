@@ -12,7 +12,7 @@ settings:
     DEVELOPMENT_TEAM: XMH4AVFC78
     SWIFT_VERSION: "5.0"
     MARKETING_VERSION: "1.0"
-    CURRENT_PROJECT_VERSION: "5"
+    CURRENT_PROJECT_VERSION: "6"
     GENERATE_INFOPLIST_FILE: YES
 
 targets:
@@ -56,6 +56,10 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.workset.watchkitapp
+        # Without this, HKHealthStore.requestAuthorization simply fails, capture
+        # never starts, and the Start button appears to do nothing. The usage
+        # strings alone are not enough — the entitlement is separate.
+        CODE_SIGN_ENTITLEMENTS: Workset Watch App/Workset Watch App.entitlements
         INFOPLIST_KEY_CFBundleDisplayName: Watchset
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
         INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.jaredgantt.workset

@@ -26,7 +26,7 @@ struct SessionView: View {
             }
             .padding(.horizontal, 4)
         }
-        .navigationTitle("Workset")
+        .navigationTitle("Watchset")
     }
 
     private var idle: some View {

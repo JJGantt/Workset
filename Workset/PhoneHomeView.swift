@@ -7,7 +7,7 @@ struct PhoneHomeView: View {
         VStack(spacing: 12) {
             Image(systemName: "figure.strengthtraining.traditional")
                 .font(.system(size: 44))
-            Text("Workset")
+            Text("Watchset")
                 .font(.title2.weight(.semibold))
             Text("Start a set from the watch.")
                 .font(.footnote)
