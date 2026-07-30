@@ -12,7 +12,7 @@ settings:
     DEVELOPMENT_TEAM: XMH4AVFC78
     SWIFT_VERSION: "5.0"
     MARKETING_VERSION: "1.0"
-    CURRENT_PROJECT_VERSION: "4"
+    CURRENT_PROJECT_VERSION: "5"
     GENERATE_INFOPLIST_FILE: YES
 
 targets:
@@ -26,6 +26,14 @@ targets:
         # "Workset" was taken on the App Store, so the record is "Watchset". The
         # name under the icon matches the store rather than the project.
         INFOPLIST_KEY_CFBundleDisplayName: Watchset
+        # These belong on the PHONE target too, even though only the watch touches
+        # CoreMotion and HealthKit. Apple's static scan reads the whole IPA and
+        # attributes the embedded watch binary's API use to the top-level bundle,
+        # which rejected build 3 and 4 with ITMS-90683 after the upload had already
+        # reported success.
+        INFOPLIST_KEY_NSMotionUsageDescription: "Watchset uses wrist motion to count your repetitions."
+        INFOPLIST_KEY_NSHealthShareUsageDescription: "Watchset reads workout data to keep rep counting alive while your wrist is down."
+        INFOPLIST_KEY_NSHealthUpdateUsageDescription: "Watchset records a workout session so rep counting continues during your set."
         # Declared so App Store Connect does not stop every upload for an export
         # compliance answer. The app ships no encryption of its own.
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
@@ -54,9 +62,9 @@ targets:
         INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp: YES
         # Motion capture during a set needs an active workout session, or the
         # watch suspends the app on wrist-down and 48-71% of samples are lost.
-        INFOPLIST_KEY_NSHealthShareUsageDescription: "Workset reads workout data to keep motion recording alive while your wrist is down."
-        INFOPLIST_KEY_NSHealthUpdateUsageDescription: "Workset records a workout session so motion capture continues during your set."
-        INFOPLIST_KEY_NSMotionUsageDescription: "Workset uses wrist motion to count your repetitions."
+        INFOPLIST_KEY_NSHealthShareUsageDescription: "Watchset reads workout data to keep rep counting alive while your wrist is down."
+        INFOPLIST_KEY_NSHealthUpdateUsageDescription: "Watchset records a workout session so rep counting continues during your set."
+        INFOPLIST_KEY_NSMotionUsageDescription: "Watchset uses wrist motion to count your repetitions."
         INFOPLIST_KEY_WKBackgroundModes: workout-processing
 
   workset-verify:
