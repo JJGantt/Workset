@@ -5,7 +5,7 @@ struct WatchHomeView: View {
         NavigationStack {
             List {
                 NavigationLink {
-                    CountView()
+                    SessionView()
                 } label: {
                     Label("Count reps", systemImage: "figure.strengthtraining.traditional")
                 }

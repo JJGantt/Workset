@@ -88,6 +88,20 @@ final class CaptureManager: ObservableObject {
         return lock.withLock { samples }
     }
 
+    /// Remove and return everything accumulated since the last call.
+    ///
+    /// Always-on counting runs for a whole workout, so nothing can accumulate here
+    /// indefinitely — an hour at 100 Hz is 360,000 samples. The session keeps only
+    /// the window it needs and drops the rest, so retention is its decision rather
+    /// than a side effect of recording.
+    nonisolated func drain() -> [MotionSample] {
+        lock.withLock {
+            let out = samples
+            samples.removeAll(keepingCapacity: true)
+            return out
+        }
+    }
+
     private func tick() {
         let n = lock.withLock { samples.count }
         sampleCount = n
