@@ -39,7 +39,8 @@ final class SessionCounter: ObservableObject {
     func end() {
         timer?.invalidate(); timer = nil
         pass?.cancel(); pass = nil
-        if machine.finish() != nil {
+        if case .closed(let n, let samples)? = machine.finish() {
+            CaptureUploader.upload(samples, counted: n)
             sets = machine.sets
             WKInterfaceDevice.current().play(.stop)
         }
@@ -80,7 +81,10 @@ final class SessionCounter: ObservableObject {
                 WKInterfaceDevice.current().play(.notification)
             case .reps:
                 WKInterfaceDevice.current().play(.click)
-            case .closed:
+            case .closed(let n, let samples):
+                // Save the recording that produced this count. A wrong number is
+                // only useful if the data behind it survives.
+                CaptureUploader.upload(samples, counted: n)
                 WKInterfaceDevice.current().play(.stop)
             }
         }

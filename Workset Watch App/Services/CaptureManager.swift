@@ -15,6 +15,7 @@ final class CaptureManager: ObservableObject {
     @Published private(set) var lastFailure: String?
 
     let keepAlive = WorkoutKeepAlive()
+    private let activity = ActivityMonitor()
 
     private let motion = CMMotionManager()
     private let queue = OperationQueue()
@@ -49,16 +50,20 @@ final class CaptureManager: ObservableObject {
         lastFailure = nil
         startedAt = Date()
 
+        activity.start()
         motion.deviceMotionUpdateInterval = interval
         motion.startDeviceMotionUpdates(using: .xMagneticNorthZVertical, to: queue) { [weak self] data, error in
             guard let self, let d = data else { return }
+            let act = self.activity.snapshot()
             let s = MotionSample(
                 sensorTime: d.timestamp,
                 userAccel: SIMD3(d.userAcceleration.x, d.userAcceleration.y, d.userAcceleration.z),
                 rotationRate: SIMD3(d.rotationRate.x, d.rotationRate.y, d.rotationRate.z),
                 gravity: SIMD3(d.gravity.x, d.gravity.y, d.gravity.z),
                 attitude: SIMD3(d.attitude.pitch, d.attitude.roll, d.attitude.yaw),
-                magAccuracy: Int(d.magneticField.accuracy.rawValue))
+                magAccuracy: Int(d.magneticField.accuracy.rawValue),
+                activityMask: act.mask,
+                activityConfidence: act.confidence)
             self.lock.withLock { self.samples.append(s) }
         }
 
@@ -71,6 +76,7 @@ final class CaptureManager: ObservableObject {
     func stop() async -> [MotionSample] {
         guard isRecording else { return [] }
         motion.stopDeviceMotionUpdates()
+        activity.stop()
         ticker?.invalidate(); ticker = nil
         await keepAlive.stop()
         isRecording = false
