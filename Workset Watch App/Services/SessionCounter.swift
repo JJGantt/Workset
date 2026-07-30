@@ -97,6 +97,9 @@ final class SessionCounter: ObservableObject {
             case .reps:
                 feedback.rep()
             case .closed(let rec, let samples):
+                // The log carries the conservative count, which can be one below
+                // what was announced. The record is the authority, not the haptics.
+                count = rec.count
                 // Save the recording AND what this version of the algorithm decided
                 // about it — count, rep boundaries, gate values. A wrong number is
                 // only useful if the data behind it survives, and an improvement is
