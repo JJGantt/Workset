@@ -18,8 +18,11 @@ final class CaptureManager: ObservableObject {
 
     private let motion = CMMotionManager()
     private let queue = OperationQueue()
-    private var samples: [MotionSample] = []
-    private var lock = NSLock()
+    // Written by the motion queue, read by the counting pass, neither on the main
+    // actor. `lock` is what makes that safe, so the isolation is opted out of
+    // explicitly rather than by accident.
+    nonisolated(unsafe) private var samples: [MotionSample] = []
+    private let lock = NSLock()
     private var ticker: Timer?
     private var startedAt: Date?
 
@@ -40,7 +43,7 @@ final class CaptureManager: ObservableObject {
         guard await keepAlive.requestAuthorization() else { return }
         await keepAlive.start()
 
-        lock.lock(); samples.removeAll(); lock.unlock()
+        lock.withLock { samples.removeAll() }
         sampleCount = 0
         quality = nil
         lastFailure = nil
@@ -56,7 +59,7 @@ final class CaptureManager: ObservableObject {
                 gravity: SIMD3(d.gravity.x, d.gravity.y, d.gravity.z),
                 attitude: SIMD3(d.attitude.pitch, d.attitude.roll, d.attitude.yaw),
                 magAccuracy: Int(d.magneticField.accuracy.rawValue))
-            self.lock.lock(); self.samples.append(s); self.lock.unlock()
+            self.lock.withLock { self.samples.append(s) }
         }
 
         isRecording = true
@@ -72,14 +75,21 @@ final class CaptureManager: ObservableObject {
         await keepAlive.stop()
         isRecording = false
 
-        lock.lock(); let out = samples; lock.unlock()
+        let out = lock.withLock { samples }
         quality = CaptureQuality.measure(out)
         sampleCount = out.count
         return out
     }
 
+    /// Everything recorded so far. Safe to call from any thread — the counting pass
+    /// runs off the main actor and needs its own copy, because the motion queue is
+    /// still appending while it works.
+    nonisolated func snapshot() -> [MotionSample] {
+        return lock.withLock { samples }
+    }
+
     private func tick() {
-        lock.lock(); let n = samples.count; lock.unlock()
+        let n = lock.withLock { samples.count }
         sampleCount = n
         if let s = startedAt { elapsed = Date().timeIntervalSince(s) }
     }

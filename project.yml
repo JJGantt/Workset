@@ -4,6 +4,7 @@ options:
   deploymentTarget:
     iOS: "18.0"
     watchOS: "11.0"
+    macOS: "14.0"
   createIntermediateGroups: true
 
 settings:
@@ -31,7 +32,9 @@ targets:
   RepCount Watch App:
     type: application
     platform: watchOS
-    sources: ["RepCount Watch App"]
+    sources:
+      - "RepCount Watch App"
+      - Algorithm/Swift
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.repcount.watchkitapp
@@ -43,3 +46,15 @@ targets:
         INFOPLIST_KEY_NSHealthUpdateUsageDescription: "RepCount records a workout session so motion capture continues during your set."
         INFOPLIST_KEY_NSMotionUsageDescription: "RepCount uses wrist motion to count your repetitions."
         INFOPLIST_KEY_WKBackgroundModes: workout-processing
+
+  repcount-verify:
+    type: tool
+    platform: macOS
+    sources:
+      - Algorithm/Swift
+      - Tools/Verify
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.repcount.verify
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGNING_REQUIRED: NO
