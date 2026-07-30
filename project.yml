@@ -1,0 +1,45 @@
+name: RepCount
+options:
+  bundleIdPrefix: com.jaredgantt
+  deploymentTarget:
+    iOS: "18.0"
+    watchOS: "11.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: XMH4AVFC78
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    GENERATE_INFOPLIST_FILE: YES
+
+targets:
+  RepCount:
+    type: application
+    platform: iOS
+    sources: [RepCount]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.repcount
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+    dependencies:
+      - target: RepCount Watch App
+        embed: true
+
+  RepCount Watch App:
+    type: application
+    platform: watchOS
+    sources: ["RepCount Watch App"]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.repcount.watchkitapp
+        INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.jaredgantt.repcount
+        INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp: YES
+        # Motion capture during a set needs an active workout session, or the
+        # watch suspends the app on wrist-down and 48-71% of samples are lost.
+        INFOPLIST_KEY_NSHealthShareUsageDescription: "RepCount reads workout data to keep motion recording alive while your wrist is down."
+        INFOPLIST_KEY_NSHealthUpdateUsageDescription: "RepCount records a workout session so motion capture continues during your set."
+        INFOPLIST_KEY_NSMotionUsageDescription: "RepCount uses wrist motion to count your repetitions."
+        INFOPLIST_KEY_WKBackgroundModes: workout-processing
