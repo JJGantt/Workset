@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct RepCountWatchApp: App {
+struct WorksetWatchApp: App {
     var body: some Scene {
         WindowGroup {
             WatchHomeView()

@@ -1,4 +1,4 @@
-name: RepCount
+name: Workset
 options:
   bundleIdPrefix: com.jaredgantt
   deploymentTarget:
@@ -16,42 +16,42 @@ settings:
     GENERATE_INFOPLIST_FILE: YES
 
 targets:
-  RepCount:
+  Workset:
     type: application
     platform: iOS
-    sources: [RepCount]
+    sources: [Workset]
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.repcount
+        PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.workset
         # Declared so App Store Connect does not stop every upload for an export
         # compliance answer. The app ships no encryption of its own.
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
     dependencies:
-      - target: RepCount Watch App
+      - target: Workset Watch App
         embed: true
 
-  RepCount Watch App:
+  Workset Watch App:
     type: application
     platform: watchOS
     sources:
-      - "RepCount Watch App"
+      - "Workset Watch App"
       - Algorithm/Swift
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.repcount.watchkitapp
+        PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.workset.watchkitapp
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
-        INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.jaredgantt.repcount
+        INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.jaredgantt.workset
         INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp: YES
         # Motion capture during a set needs an active workout session, or the
         # watch suspends the app on wrist-down and 48-71% of samples are lost.
-        INFOPLIST_KEY_NSHealthShareUsageDescription: "RepCount reads workout data to keep motion recording alive while your wrist is down."
-        INFOPLIST_KEY_NSHealthUpdateUsageDescription: "RepCount records a workout session so motion capture continues during your set."
-        INFOPLIST_KEY_NSMotionUsageDescription: "RepCount uses wrist motion to count your repetitions."
+        INFOPLIST_KEY_NSHealthShareUsageDescription: "Workset reads workout data to keep motion recording alive while your wrist is down."
+        INFOPLIST_KEY_NSHealthUpdateUsageDescription: "Workset records a workout session so motion capture continues during your set."
+        INFOPLIST_KEY_NSMotionUsageDescription: "Workset uses wrist motion to count your repetitions."
         INFOPLIST_KEY_WKBackgroundModes: workout-processing
 
-  repcount-verify:
+  workset-verify:
     type: tool
     platform: macOS
     sources:
@@ -59,6 +59,6 @@ targets:
       - Tools/Verify
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.repcount.verify
+        PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.workset.verify
         CODE_SIGN_IDENTITY: "-"
         CODE_SIGNING_REQUIRED: NO

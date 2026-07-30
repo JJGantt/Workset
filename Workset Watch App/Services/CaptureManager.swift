@@ -30,7 +30,7 @@ final class CaptureManager: ObservableObject {
     private let interval = 0.01
 
     init() {
-        queue.name = "com.jaredgantt.repcount.motion"
+        queue.name = "com.jaredgantt.workset.motion"
         queue.maxConcurrentOperationCount = 1
     }
 

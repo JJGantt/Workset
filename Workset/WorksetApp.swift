@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct RepCountApp: App {
+struct WorksetApp: App {
     var body: some Scene {
         WindowGroup {
             PhoneHomeView()
