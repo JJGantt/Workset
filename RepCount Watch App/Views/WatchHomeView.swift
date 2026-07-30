@@ -5,7 +5,7 @@ struct WatchHomeView: View {
         NavigationStack {
             List {
                 NavigationLink {
-                    Text("Capture")
+                    CaptureView()
                 } label: {
                     Label("Record a set", systemImage: "waveform.path.ecg")
                 }
