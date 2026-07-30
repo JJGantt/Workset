@@ -39,8 +39,8 @@ final class SessionCounter: ObservableObject {
     func end() {
         timer?.invalidate(); timer = nil
         pass?.cancel(); pass = nil
-        if case .closed(let n, let samples)? = machine.finish() {
-            CaptureUploader.upload(samples, counted: n)
+        if case .closed(let rec, let samples)? = machine.finish() {
+            CaptureUploader.upload(samples, verdict: rec)
             sets = machine.sets
             WKInterfaceDevice.current().play(.stop)
         }
@@ -81,10 +81,12 @@ final class SessionCounter: ObservableObject {
                 WKInterfaceDevice.current().play(.notification)
             case .reps:
                 WKInterfaceDevice.current().play(.click)
-            case .closed(let n, let samples):
-                // Save the recording that produced this count. A wrong number is
-                // only useful if the data behind it survives.
-                CaptureUploader.upload(samples, counted: n)
+            case .closed(let rec, let samples):
+                // Save the recording AND what this version of the algorithm decided
+                // about it — count, rep boundaries, gate values. A wrong number is
+                // only useful if the data behind it survives, and an improvement is
+                // only visible if the previous verdict was written down.
+                CaptureUploader.upload(samples, verdict: rec)
                 WKInterfaceDevice.current().play(.stop)
             }
         }
