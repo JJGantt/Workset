@@ -19,9 +19,20 @@ final class SessionCounter: ObservableObject {
     /// judged against real hardware rather than assumed.
     @Published private(set) var lastPassMs: Double = 0
 
+    private let feedback = Feedback()
     private var machine = SessionMachine()
-    private var timer: Timer?
+    private var running = false
     private var pass: Task<Void, Never>?
+
+    /// Floor between passes. Not a cadence — the next pass starts as soon as the
+    /// last one finishes, and this only stops a fast watch from spinning.
+    ///
+    /// A fixed 0.5s timer was worse than it looked: a tick that arrived while a pass
+    /// was still running was DROPPED, so on hardware where a pass takes longer than
+    /// the tick the real cadence silently doubled and every rep was announced late.
+    /// Self-pacing cannot drift that way — it is always running as fast as the
+    /// hardware allows, and `lastPassMs` says what that actually costs.
+    private let floorInterval: TimeInterval = 0.2
     private var pull: () -> [MotionSample] = { [] }
 
     func begin(pull: @escaping () -> [MotionSample]) {
@@ -30,29 +41,26 @@ final class SessionCounter: ObservableObject {
         count = 0
         sets = []
         phase = .armed
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.tick() }
-        }
+        running = true
+        tick()
     }
 
     func end() {
-        timer?.invalidate(); timer = nil
+        running = false
         pass?.cancel(); pass = nil
         if case .closed(let rec, let samples)? = machine.finish() {
             CaptureUploader.upload(samples, verdict: rec)
             sets = machine.sets
-            WKInterfaceDevice.current().play(.stop)
+            feedback.setEnded()
         }
+        feedback.release()
         phase = .off
         count = 0
     }
 
     private func tick() {
-        // One pass at a time. If the watch is slower than the tick, passes are
-        // skipped rather than queued — a backlog would report older and older counts
-        // while burning the battery that produced them.
-        guard pass == nil else { return }
+        guard running, pass == nil else { return }
+        let started = Date()
         let new = pull()
         var m = machine
         pass = Task.detached(priority: .userInitiated) {
@@ -61,8 +69,15 @@ final class SessionCounter: ObservableObject {
             let ms = Date().timeIntervalSince(started) * 1000
             let snapshot = m
             await MainActor.run { [weak self] in
-                self?.apply(snapshot, events: events, ms: ms)
-                self?.pass = nil
+                guard let self else { return }
+                self.apply(snapshot, events: events, ms: ms)
+                self.pass = nil
+                guard self.running else { return }
+                let elapsed = Date().timeIntervalSince(started)
+                let wait = max(0, self.floorInterval - elapsed)
+                DispatchQueue.main.asyncAfter(deadline: .now() + wait) { [weak self] in
+                    self?.tick()
+                }
             }
         }
     }
@@ -76,18 +91,18 @@ final class SessionCounter: ObservableObject {
         for e in events {
             switch e {
             case .committed:
-                // The first commit lands several reps at once. One
-                // distinct haptic for "locked on", not a burst of clicks.
-                WKInterfaceDevice.current().play(.notification)
+                // Lands at three reps and announces all three at once, so it has to
+                // be clearly distinct from a single rep tick.
+                feedback.locked()
             case .reps:
-                WKInterfaceDevice.current().play(.click)
+                feedback.rep()
             case .closed(let rec, let samples):
                 // Save the recording AND what this version of the algorithm decided
                 // about it — count, rep boundaries, gate values. A wrong number is
                 // only useful if the data behind it survives, and an improvement is
                 // only visible if the previous verdict was written down.
                 CaptureUploader.upload(samples, verdict: rec)
-                WKInterfaceDevice.current().play(.stop)
+                feedback.setEnded()
             }
         }
     }
