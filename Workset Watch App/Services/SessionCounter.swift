@@ -14,7 +14,20 @@ final class SessionCounter: ObservableObject {
 
     @Published private(set) var phase: Phase = .off
     @Published private(set) var count = 0
-    @Published private(set) var sets: [CountedSet] = []
+    /// A closed set plus the id of the report that logged it, so the wrist can
+    /// still correct or remove it afterwards.
+    struct Logged: Identifiable {
+        let id = UUID()
+        let set: CountedSet
+        var reportID: Int?
+        var adjust = 0          // what the +/- buttons have applied
+        var removed = false
+        var reps: Int { max(1, set.count + adjust) }
+    }
+
+    @Published private(set) var sets: [Logged] = []
+    /// What the set watcher is armed to, or nil when nothing is being logged.
+    @Published private(set) var armedAs: String?
     /// Cost of the last counting pass. On screen because the update rate has to be
     /// judged against real hardware rather than assumed.
     @Published private(set) var lastPassMs: Double = 0
@@ -50,8 +63,7 @@ final class SessionCounter: ObservableObject {
         pass?.cancel(); pass = nil
         if case .closed(let rec, let samples)? = machine.finish() {
             CaptureUploader.upload(samples, verdict: rec)
-            sets = machine.sets
-            feedback.setEnded()
+                feedback.setEnded()
         }
         feedback.release()
         phase = .off
@@ -82,11 +94,47 @@ final class SessionCounter: ObservableObject {
         }
     }
 
+    /// Record the set locally and report it, so it lands in the training log.
+    private func logClosed(_ rec: CountedSet) {
+        sets.append(Logged(set: rec, reportID: nil))
+        let idx = sets.count - 1
+        SetReporter.report(reps: rec.count, at: Date(),
+                           session: "watch", algorithm: rec.algorithm) { [weak self] id in
+            Task { @MainActor in
+                guard let self, idx < self.sets.count else { return }
+                self.sets[idx].reportID = id
+            }
+        }
+        refreshArmed()
+    }
+
+    /// The +/- buttons: fix a count on the wrist.
+    func adjust(_ index: Int, by delta: Int) {
+        guard sets.indices.contains(index), !sets[index].removed else { return }
+        let next = max(1, sets[index].set.count + sets[index].adjust + delta)
+        sets[index].adjust = next - sets[index].set.count
+        if let id = sets[index].reportID { SetReporter.correct(reportID: id, reps: next) }
+    }
+
+    /// The X button: this was not a set.
+    func remove(_ index: Int) {
+        guard sets.indices.contains(index) else { return }
+        sets[index].removed = true
+        if let id = sets[index].reportID { SetReporter.remove(reportID: id) }
+    }
+
+    func refreshArmed() {
+        SetReporter.armedExercise { [weak self] s in
+            Task { @MainActor in self?.armedAs = s }
+        }
+    }
+
     private func apply(_ m: SessionMachine, events: [SessionMachine.Event], ms: Double) {
         machine = m
         lastPassMs = ms
         count = m.count
-        sets = m.sets
+        // `sets` is owned here, not mirrored from the machine: it carries the report
+        // ids and the wrist edits, which the machine knows nothing about.
         phase = m.phase == .counting ? .counting : .armed
         for e in events {
             switch e {
@@ -100,6 +148,7 @@ final class SessionCounter: ObservableObject {
                 // The log carries the conservative count, which can be one below
                 // what was announced. The record is the authority, not the haptics.
                 count = rec.count
+                logClosed(rec)
                 // Save the recording AND what this version of the algorithm decided
                 // about it — count, rep boundaries, gate values. A wrong number is
                 // only useful if the data behind it survives, and an improvement is

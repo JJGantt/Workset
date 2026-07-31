@@ -18,6 +18,7 @@ struct SessionView: View {
                 case .counting: counting
                 }
 
+                if session.phase != .off { watcherBadge }
                 if !session.sets.isEmpty { log }
 
                 if let f = capture.lastFailure {
@@ -90,20 +91,43 @@ struct SessionView: View {
     }
 
     private var log: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 6) {
             Divider()
             // Newest first — the set just finished is the one being checked.
-            ForEach(Array(session.sets.enumerated().reversed()), id: \.offset) { _, s in
-                HStack {
-                    Text("\(s.count)")
+            ForEach(Array(session.sets.enumerated().reversed()), id: \.element.id) { i, s in
+                HStack(spacing: 6) {
+                    Text("\(s.reps)")
                         .font(.system(.title3, design: .rounded).weight(.semibold))
-                        .frame(width: 34, alignment: .trailing)
+                        .frame(width: 30, alignment: .trailing)
+                        .strikethrough(s.removed)
+                        .foregroundStyle(s.removed ? .secondary : .primary)
                     Text("reps").font(.caption2).foregroundStyle(.secondary)
                     Spacer()
-                    Text("\(Int(s.duration))s")
-                        .font(.caption2).foregroundStyle(.secondary)
+                    if !s.removed {
+                        // A miscount is fixed on the wrist rather than remembered
+                        // until later. These edit the report, which edits the log.
+                        Button { session.adjust(i, by: -1) } label: { Image(systemName: "minus") }
+                            .buttonStyle(.bordered).controlSize(.mini)
+                        Button { session.adjust(i, by: 1) } label: { Image(systemName: "plus") }
+                            .buttonStyle(.bordered).controlSize(.mini)
+                        Button { session.remove(i) } label: { Image(systemName: "xmark") }
+                            .buttonStyle(.bordered).controlSize(.mini).tint(.red)
+                    }
                 }
             }
+        }
+    }
+
+    /// What the set watcher is armed to. If nothing is, counted sets are NOT being
+    /// logged, and the lifter should know that while there is still time to arm it.
+    @ViewBuilder
+    private var watcherBadge: some View {
+        if let a = session.armedAs {
+            Label(a, systemImage: "checkmark.circle.fill")
+                .font(.caption2).foregroundStyle(.green).lineLimit(1)
+        } else {
+            Label("not logging", systemImage: "circle.dashed")
+                .font(.caption2).foregroundStyle(.secondary)
         }
     }
 }

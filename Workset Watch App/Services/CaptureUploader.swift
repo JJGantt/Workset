@@ -16,7 +16,7 @@ enum CaptureUploader {
     /// Publishable key: designed to be shipped. Storage RLS lets it CREATE objects
     /// in this bucket and nothing else — it cannot read back what was recorded, or
     /// overwrite it, or delete it. Reading is service-role only.
-    private static let key = "sb_publishable_H2P7Gl1d_bGngnilIlBDsg_Bvkp_Uae"
+    static let publishableKey = "sb_publishable_H2P7Gl1d_bGngnilIlBDsg_Bvkp_Uae"
 
     /// Sets that could not be uploaded yet. The gym is exactly where the watch has
     /// no useful connection, so a failed upload queues on disk and is retried rather
@@ -53,8 +53,8 @@ enum CaptureUploader {
             guard let url = URL(string: "\(base)/storage/v1/object/\(path)") else { continue }
             var req = URLRequest(url: url)
             req.httpMethod = "POST"
-            req.setValue(key, forHTTPHeaderField: "apikey")
-            req.setValue("Bearer \(key)", forHTTPHeaderField: "Authorization")
+            req.setValue(publishableKey, forHTTPHeaderField: "apikey")
+            req.setValue("Bearer \(publishableKey)", forHTTPHeaderField: "Authorization")
             req.setValue("text/csv", forHTTPHeaderField: "Content-Type")
             req.httpBody = body
             URLSession.shared.dataTask(with: req) { _, resp, _ in
