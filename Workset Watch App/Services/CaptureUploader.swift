@@ -30,11 +30,13 @@ enum CaptureUploader {
     /// Persist first, then try to send. Writing to disk before attempting the network
     /// means a set survives the app being killed mid-upload.
     static func upload(_ samples: [MotionSample], verdict: CountedSet?,
-                       exercise: String? = nil, weightLbs: Double? = nil) {
+                       exercise: String? = nil, weightLbs: Double? = nil,
+                       cancelled: Bool = false) {
         guard samples.count > 8 else { return }
         let session = "unlabeled_0_\(Int(Date().timeIntervalSince1970))"
         let body = Data(CaptureFormat.csv(samples, session: session, verdict: verdict,
-                                          exercise: exercise, weightLbs: weightLbs).utf8)
+                                          exercise: exercise, weightLbs: weightLbs,
+                                          cancelled: cancelled).utf8)
         if let dir = queueDir {
             try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
             try? body.write(to: dir.appendingPathComponent("\(session).csv"))

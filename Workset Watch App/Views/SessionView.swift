@@ -8,6 +8,7 @@ import SwiftUI
 struct SessionView: View {
     @StateObject private var capture = CaptureManager()
     @StateObject private var session = SessionCounter()
+    @State private var showManual = false
 
     var body: some View {
         ScrollView {
@@ -28,6 +29,12 @@ struct SessionView: View {
             .padding(.horizontal, 4)
         }
         .navigationTitle("Watchset")
+        .sheet(isPresented: $showManual) {
+            ManualSetView(armedAs: session.armedAs) { reps in
+                session.addManual(reps: reps)
+                showManual = false
+            }
+        }
     }
 
     private var idle: some View {
@@ -53,6 +60,15 @@ struct SessionView: View {
             Text("watching")
                 .font(.caption).foregroundStyle(.secondary)
             protection
+            // Only offered between sets: adding a set by hand while one is being
+            // counted would put two sets in the log for one piece of lifting.
+            Button {
+                showManual = true
+            } label: {
+                Label("Add set", systemImage: "plus.circle")
+            }
+            .tint(.blue)
+            .font(.caption)
             stopButton
         }
     }
@@ -65,6 +81,12 @@ struct SessionView: View {
                 .animation(.snappy, value: session.count)
             Text("reps").font(.caption2).foregroundStyle(.secondary)
             protection
+            // Reject THIS set without switching the session off. Turning the session
+            // off and on again was the only way to do it before, and that clears the
+            // list of sets already done.
+            Button("Discard set") { session.cancelCurrent() }
+                .tint(.orange)
+                .font(.caption)
             stopButton
         }
     }

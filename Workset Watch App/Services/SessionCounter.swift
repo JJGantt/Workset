@@ -130,6 +130,39 @@ final class SessionCounter: ObservableObject {
         refreshArmed()
     }
 
+    /// Throw away the set being counted right now, without stopping the session.
+    ///
+    /// The alternative was switching the whole session off and on again, which clears
+    /// the list of sets already done — losing a workout's worth of history to reject
+    /// one bad set.
+    ///
+    /// The recording is still uploaded, marked cancelled. A set the counter recognised
+    /// and the lifter rejected is a labelled false positive, and there is no other way
+    /// to produce one; discarding it would throw away the only recording that proves
+    /// the counter fires on something that is not a set.
+    func cancelCurrent() {
+        let samples = machine.discard()
+        count = 0
+        phase = .armed
+        CaptureUploader.upload(samples, verdict: nil, exercise: armedExercise,
+                               weightLbs: armedWeight, cancelled: true)
+        feedback.setEnded()
+    }
+
+    /// Add a set by hand, at whatever the watcher is armed to.
+    ///
+    /// For everything the wrist cannot see — leg press, seated calf raise, anything
+    /// where the arm holds still. It goes through the identical path a counted set
+    /// takes, so it lands in the training log the same way and can be corrected or
+    /// removed from the wrist afterwards.
+    func addManual(reps: Int) {
+        guard reps > 0 else { return }
+        let rec = CountedSet(count: reps, startedAt: 0, endedAt: 0,
+                             seedSpread: 0, travelCm: 0, repEnds: [], repFired: [],
+                             algorithm: "manual")
+        logClosed(rec)
+    }
+
     /// The +/- buttons: fix a count on the wrist.
     func adjust(_ index: Int, by delta: Int) {
         guard sets.indices.contains(index), !sets[index].removed else { return }
