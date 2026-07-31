@@ -94,8 +94,8 @@ final class SessionCounter: ObservableObject {
                 // Lands at three reps and announces all three at once, so it has to
                 // be clearly distinct from a single rep tick.
                 feedback.locked()
-            case .reps:
-                feedback.rep()
+            case .reps(let n):
+                feedback.rep(n)
             case .closed(let rec, let samples):
                 // The log carries the conservative count, which can be one below
                 // what was announced. The record is the authority, not the haptics.

@@ -23,14 +23,21 @@ final class Feedback {
         play(locked_)
     }
 
-    /// One more rep. Deliberately the smallest thing available.
+    /// One more rep: a tap on the wrist and the number said aloud.
     ///
-    /// This fires up to sixteen times in a set and once per rep for the whole
-    /// workout. Anything with presence becomes irritating by rep eight, so it is the
-    /// subtlest haptic watchOS offers and a 28 ms tick.
-    func rep() {
+    /// The number is a pre-rendered file rather than live speech synthesis, because
+    /// `AVSpeechSynthesizer`'s first utterance has unpredictable startup latency and
+    /// this fires on a beat the lifter can feel. Files decode in microseconds and
+    /// play the instant the rep is counted.
+    ///
+    /// Counting starts at five. Four is the lock-on chime — by then the algorithm
+    /// has established the cycle and announced the first four reps together, so
+    /// speaking "four" would be announcing a number that was already true. Past the
+    /// last rendered number it falls back to the tick, which is honest: a tap that
+    /// means "one more" rather than a wrong number.
+    func rep(_ n: Int) {
         WKInterfaceDevice.current().play(.click)
-        play(rep_)
+        if let spoken = number(n) { play(spoken) } else { play(rep_) }
     }
 
     /// The set closed and the count is final.
@@ -43,10 +50,21 @@ final class Feedback {
     private var rep_: AVAudioPlayer?
     private var locked_: AVAudioPlayer?
     private var ready = false
+    /// Loaded on demand and kept: a set revisits the same handful of numbers, and
+    /// loading 50 files up front would cost launch time for words most sets never
+    /// reach.
+    private var spokenCache: [Int: AVAudioPlayer] = [:]
 
     init() {
         rep_ = load("rep")
         locked_ = load("locked")
+    }
+
+    private func number(_ n: Int) -> AVAudioPlayer? {
+        if let p = spokenCache[n] { return p }
+        guard let p = load("n\(n)") else { return nil }
+        spokenCache[n] = p
+        return p
     }
 
     private func load(_ name: String) -> AVAudioPlayer? {
