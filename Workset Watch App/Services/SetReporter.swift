@@ -82,8 +82,9 @@ enum SetReporter {
             iso.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
             let t = stamp.flatMap { iso.date(from: $0) ?? ISO8601DateFormatter().date(from: $0) }
             guard let t, Date().timeIntervalSince(t) < 600 else { then(nil); return }
-            let w = row["weight_lbs"] as? Double
-            then(w != nil ? "\(ex) · \(Int(w!)) lb" : ex)
+            // Bodyweight reads as "bodyweight", not "0 lb" — matching the hub.
+            guard let w = row["weight_lbs"] as? Double else { then(ex); return }
+            then(w == 0 ? "\(ex) · bodyweight" : "\(ex) · \(Int(w)) lb")
         }.resume()
     }
 }

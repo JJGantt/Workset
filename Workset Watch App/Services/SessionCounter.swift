@@ -47,6 +47,9 @@ final class SessionCounter: ObservableObject {
     /// hardware allows, and `lastPassMs` says what that actually costs.
     private let floorInterval: TimeInterval = 0.2
     private var pull: () -> [MotionSample] = { [] }
+    /// The watcher can be set, changed or allowed to expire while the app is running,
+    /// so the badge is re-checked rather than read once.
+    private var lastArmedCheck = Date.distantPast
 
     func begin(pull: @escaping () -> [MotionSample]) {
         self.pull = pull
@@ -54,6 +57,10 @@ final class SessionCounter: ObservableObject {
         count = 0
         sets = []
         phase = .armed
+        // Ask straight away what the rep watcher is set to. Knowing whether sets are
+        // being logged is only useful BEFORE lifting; discovering it afterwards is
+        // no use at all.
+        refreshArmed()
         running = true
         tick()
     }
@@ -71,7 +78,12 @@ final class SessionCounter: ObservableObject {
     }
 
     private func tick() {
-        guard running, pass == nil else { return }
+        guard running else { return }
+        if Date().timeIntervalSince(lastArmedCheck) > 15 {
+            lastArmedCheck = Date()
+            refreshArmed()
+        }
+        guard pass == nil else { return }
         let started = Date()
         let new = pull()
         var m = machine
@@ -124,6 +136,7 @@ final class SessionCounter: ObservableObject {
     }
 
     func refreshArmed() {
+        lastArmedCheck = Date()
         SetReporter.armedExercise { [weak self] s in
             Task { @MainActor in self?.armedAs = s }
         }
