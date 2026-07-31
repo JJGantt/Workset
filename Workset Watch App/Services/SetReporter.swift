@@ -68,7 +68,7 @@ enum SetReporter {
 
     /// What the watcher is currently armed to, so the watch can say whether a set it
     /// counts is actually being logged.
-    static func armedExercise(then: @escaping (String?) -> Void) {
+    static func armedExercise(then: @escaping ((label: String, exercise: String, weight: Double?)?) -> Void) {
         guard let req = request("/rest/v1/set_watcher?id=eq.1&select=exercise,weight_lbs,armed_at,last_set_at",
                                 "GET", nil, prefer: nil) else { then(nil); return }
         URLSession.shared.dataTask(with: req) { data, _, _ in
@@ -83,8 +83,9 @@ enum SetReporter {
             let t = stamp.flatMap { iso.date(from: $0) ?? ISO8601DateFormatter().date(from: $0) }
             guard let t, Date().timeIntervalSince(t) < 600 else { then(nil); return }
             // Bodyweight reads as "bodyweight", not "0 lb" — matching the hub.
-            guard let w = row["weight_lbs"] as? Double else { then(ex); return }
-            then(w == 0 ? "\(ex) · bodyweight" : "\(ex) · \(Int(w)) lb")
+            let w = row["weight_lbs"] as? Double
+            let label = w.map { $0 == 0 ? "\(ex) · bodyweight" : "\(ex) · \(Int($0)) lb" } ?? ex
+            then((label: label, exercise: ex, weight: w))
         }.resume()
     }
 }

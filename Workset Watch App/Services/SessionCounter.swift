@@ -28,6 +28,11 @@ final class SessionCounter: ObservableObject {
     @Published private(set) var sets: [Logged] = []
     /// What the set watcher is armed to, or nil when nothing is being logged.
     @Published private(set) var armedAs: String?
+    /// The armed exercise and weight as separate values, so a capture records what it
+    /// IS rather than only how it is displayed. This is what makes a per-exercise
+    /// shape library possible: a recording says which movement it is, on its own.
+    private var armedExercise: String?
+    private var armedWeight: Double?
     /// Cost of the last counting pass. On screen because the update rate has to be
     /// judged against real hardware rather than assumed.
     @Published private(set) var lastPassMs: Double = 0
@@ -69,8 +74,13 @@ final class SessionCounter: ObservableObject {
         running = false
         pass?.cancel(); pass = nil
         if case .closed(let rec, let samples)? = machine.finish() {
-            CaptureUploader.upload(samples, verdict: rec)
-                feedback.setEnded()
+            // A set ended by pressing Stop is still a set: it uploads AND logs, the
+            // same as one that closed on its own. This previously only uploaded, so
+            // the last set of a workout never reached the training log.
+            CaptureUploader.upload(samples, verdict: rec,
+                                   exercise: armedExercise, weightLbs: armedWeight)
+            logClosed(rec)
+            feedback.setEnded()
         }
         feedback.release()
         phase = .off
@@ -137,8 +147,12 @@ final class SessionCounter: ObservableObject {
 
     func refreshArmed() {
         lastArmedCheck = Date()
-        SetReporter.armedExercise { [weak self] s in
-            Task { @MainActor in self?.armedAs = s }
+        SetReporter.armedExercise { [weak self] info in
+            Task { @MainActor in
+                self?.armedAs = info?.label
+                self?.armedExercise = info?.exercise
+                self?.armedWeight = info?.weight
+            }
         }
     }
 
@@ -166,7 +180,8 @@ final class SessionCounter: ObservableObject {
                 // about it — count, rep boundaries, gate values. A wrong number is
                 // only useful if the data behind it survives, and an improvement is
                 // only visible if the previous verdict was written down.
-                CaptureUploader.upload(samples, verdict: rec)
+                CaptureUploader.upload(samples, verdict: rec,
+                                       exercise: armedExercise, weightLbs: armedWeight)
                 feedback.setEnded()
             }
         }
