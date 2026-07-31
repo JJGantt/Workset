@@ -1,8 +1,18 @@
 import SwiftUI
 
+/// Records a set WITHOUT counting it — how new reference recordings get made.
+///
+/// The recording is uploaded on stop, labelled with whatever the rep watcher is armed
+/// to. It reports no rep count and creates no logged set: this mode exists to capture
+/// a movement the algorithm should be measured against, not to add training data.
+///
+/// It previously assigned the finished samples to a local array and dropped them. A
+/// recording made here reached the quality summary and went no further, which made the
+/// whole mode silently useless — the thing it exists to produce was never produced.
 struct CaptureView: View {
     @StateObject private var capture = CaptureManager()
-    @State private var finished: [MotionSample] = []
+    @State private var armed: (label: String, exercise: String, weight: Double?)?
+    @State private var uploaded = false
 
     var body: some View {
         VStack(spacing: 10) {
@@ -21,17 +31,35 @@ struct CaptureView: View {
                     .font(.caption2)
                     .foregroundStyle(capture.keepAlive.isHolding ? .green : .red)
 
-                Button("Stop") { Task { finished = await capture.stop() } }
-                    .tint(.red)
+                Button("Stop") {
+                    Task {
+                        let samples = await capture.stop()
+                        CaptureUploader.upload(samples, verdict: nil,
+                                               exercise: armed?.exercise,
+                                               weightLbs: armed?.weight)
+                        uploaded = samples.count > 8
+                    }
+                }
+                .tint(.red)
             } else if let q = capture.quality {
                 summary(q)
             } else {
                 Button {
-                    Task { await capture.start() }
+                    Task {
+                        uploaded = false
+                        await capture.start()
+                    }
                 } label: {
                     Label("Start set", systemImage: "record.circle")
                 }
                 .tint(.green)
+
+                // What the recording will be labelled as. A capture that lands
+                // unlabelled is far less useful than one that names its movement, so
+                // this is on screen BEFORE recording rather than discovered after.
+                Text(armed.map { "labels as \($0.label)" } ?? "no exercise armed")
+                    .font(.caption2)
+                    .foregroundStyle(armed == nil ? .orange : .secondary)
             }
 
             if let f = capture.lastFailure {
@@ -40,6 +68,11 @@ struct CaptureView: View {
         }
         .padding()
         .navigationTitle("Capture")
+        .task {
+            SetReporter.armedExercise { a in
+                Task { @MainActor in armed = a }
+            }
+        }
     }
 
     @ViewBuilder
@@ -55,6 +88,11 @@ struct CaptureView: View {
                 .font(.caption2).foregroundStyle(.secondary)
             Text("\(q.spanSeconds, format: .number.precision(.fractionLength(1)))s")
                 .font(.caption2).foregroundStyle(.secondary)
+            // Whether it actually left the watch. A queued upload retries, but a
+            // recording that was never handed over at all is simply gone.
+            Text(uploaded ? "saved" : "NOT SAVED")
+                .font(.caption2.weight(.bold))
+                .foregroundStyle(uploaded ? .green : .red)
         }
     }
 }
