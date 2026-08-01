@@ -69,7 +69,7 @@ struct CaptureView: View {
         .padding()
         .navigationTitle("Capture")
         .task {
-            SetReporter.armedExercise { a in
+            SetReporter.armedExercise { a, _ in
                 Task { @MainActor in armed = a }
             }
         }

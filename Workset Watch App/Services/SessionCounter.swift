@@ -28,6 +28,9 @@ final class SessionCounter: ObservableObject {
     @Published private(set) var sets: [Logged] = []
     /// What the set watcher is armed to, or nil when nothing is being logged.
     @Published private(set) var armedAs: String?
+    /// The last check could not reach the server at all. Distinct from "nothing is
+    /// armed": one means arm it, the other means the watch is offline.
+    @Published private(set) var watcherUnreachable = false
     /// The armed exercise and weight as separate values, so a capture records what it
     /// IS rather than only how it is displayed. This is what makes a per-exercise
     /// shape library possible: a recording says which movement it is, on its own.
@@ -180,8 +183,13 @@ final class SessionCounter: ObservableObject {
 
     func refreshArmed() {
         lastArmedCheck = Date()
-        SetReporter.armedExercise { [weak self] info in
+        SetReporter.armedExercise { [weak self] info, reachable in
             Task { @MainActor in
+                self?.watcherUnreachable = !reachable
+                // A failed check leaves the last known arming in place rather than
+                // blanking it. Dropping to "not logging" because one request timed out
+                // says the sets are not being recorded when they are.
+                guard reachable else { return }
                 self?.armedAs = info?.label
                 self?.armedExercise = info?.exercise
                 self?.armedWeight = info?.weight

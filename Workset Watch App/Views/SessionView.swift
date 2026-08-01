@@ -144,7 +144,11 @@ struct SessionView: View {
     /// logged, and the lifter should know that while there is still time to arm it.
     @ViewBuilder
     private var watcherBadge: some View {
-        if let a = session.armedAs {
+        if session.watcherUnreachable {
+            // Not the same as nothing being armed, and not the same reaction either.
+            Label("can't reach server", systemImage: "wifi.exclamationmark")
+                .font(.caption2).foregroundStyle(.orange).lineLimit(1)
+        } else if let a = session.armedAs {
             Label(a, systemImage: "checkmark.circle.fill")
                 .font(.caption2).foregroundStyle(.green).lineLimit(1)
         } else {

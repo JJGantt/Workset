@@ -68,24 +68,32 @@ enum SetReporter {
 
     /// What the watcher is currently armed to, so the watch can say whether a set it
     /// counts is actually being logged.
-    static func armedExercise(then: @escaping ((label: String, exercise: String, weight: Double?)?) -> Void) {
+    ///
+    /// `reachable` is false only when the request itself failed. Without it, a watch
+    /// with no route to the network is indistinguishable from a watcher that was never
+    /// armed — both produce nil, both read "not logging", and the lifter has no way to
+    /// tell "arm it" from "your watch is offline". Those need different reactions.
+    static func armedExercise(then: @escaping ((label: String, exercise: String, weight: Double?)?,
+                                               _ reachable: Bool) -> Void) {
         guard let req = request("/rest/v1/set_watcher?id=eq.1&select=exercise,weight_lbs,armed_at,last_set_at",
-                                "GET", nil, prefer: nil) else { then(nil); return }
-        URLSession.shared.dataTask(with: req) { data, _, _ in
+                                "GET", nil, prefer: nil) else { then(nil, false); return }
+        URLSession.shared.dataTask(with: req) { data, resp, err in
+            let code = (resp as? HTTPURLResponse)?.statusCode ?? 0
+            guard err == nil, (200..<300).contains(code) else { then(nil, false); return }
             guard let d = data,
                   let rows = try? JSONSerialization.jsonObject(with: d) as? [[String: Any]],
-                  let row = rows.first,
-                  let ex = row["exercise"] as? String else { then(nil); return }
+                  let row = rows.first else { then(nil, false); return }
+            guard let ex = row["exercise"] as? String else { then(nil, true); return }
             // Mirrors set_watcher_is_armed(): ten minutes with no set disarms it.
             let stamp = (row["last_set_at"] as? String) ?? (row["armed_at"] as? String)
             let iso = ISO8601DateFormatter()
             iso.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
             let t = stamp.flatMap { iso.date(from: $0) ?? ISO8601DateFormatter().date(from: $0) }
-            guard let t, Date().timeIntervalSince(t) < 600 else { then(nil); return }
+            guard let t, Date().timeIntervalSince(t) < 600 else { then(nil, true); return }
             // Bodyweight reads as "bodyweight", not "0 lb" — matching the hub.
             let w = row["weight_lbs"] as? Double
             let label = w.map { $0 == 0 ? "\(ex) · bodyweight" : "\(ex) · \(Int($0)) lb" } ?? ex
-            then((label: label, exercise: ex, weight: w))
+            then((label: label, exercise: ex, weight: w), true)
         }.resume()
     }
 }
