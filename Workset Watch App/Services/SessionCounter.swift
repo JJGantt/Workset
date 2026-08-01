@@ -166,6 +166,10 @@ final class SessionCounter: ObservableObject {
         logClosed(rec)
     }
 
+    /// The rep count of the last set that was not removed, or nil if there is none.
+    /// What "repeat" repeats.
+    var lastReps: Int? { sets.last(where: { !$0.removed })?.reps }
+
     /// The +/- buttons: fix a count on the wrist.
     func adjust(_ index: Int, by delta: Int) {
         guard sets.indices.contains(index), !sets[index].removed else { return }

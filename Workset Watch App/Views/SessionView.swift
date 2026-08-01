@@ -62,12 +62,26 @@ struct SessionView: View {
             protection
             // Only offered between sets: adding a set by hand while one is being
             // counted would put two sets in the log for one piece of lifting.
-            Button {
-                showManual = true
-            } label: {
-                Label("Add set", systemImage: "plus.circle")
+            HStack(spacing: 6) {
+                Button {
+                    showManual = true
+                } label: {
+                    Label("Add", systemImage: "plus.circle")
+                }
+                .tint(.blue)
+
+                // Straight sets are the common case — the same number again, and
+                // again. Dialling it in each time is the same work repeated, so the
+                // last count is one tap. Hidden until there IS a last count.
+                if let last = session.lastReps {
+                    Button {
+                        session.addManual(reps: last)
+                    } label: {
+                        Label("\(last)", systemImage: "arrow.clockwise")
+                    }
+                    .tint(.indigo)
+                }
             }
-            .tint(.blue)
             .font(.caption)
             stopButton
         }
