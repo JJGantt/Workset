@@ -76,7 +76,8 @@ final class SessionCounter: ObservableObject {
     func end() {
         running = false
         pass?.cancel(); pass = nil
-        if case .closed(let rec, let samples)? = machine.finish() {
+        switch machine.finish() {
+        case .closed(let rec, let samples)?:
             // A set ended by pressing Stop is still a set: it uploads AND logs, the
             // same as one that closed on its own. This previously only uploaded, so
             // the last set of a workout never reached the training log.
@@ -84,6 +85,13 @@ final class SessionCounter: ObservableObject {
                                    exercise: armedExercise, weightLbs: armedWeight)
             logClosed(rec)
             feedback.setEnded()
+        case .tooShort(let rec, let samples)?:
+            // Too few reps to be a set. The recording is still kept — losing it here
+            // would throw away the only labelled evidence of a false detection.
+            CaptureUploader.upload(samples, verdict: rec, exercise: armedExercise,
+                                   weightLbs: armedWeight, cancelled: true)
+        default:
+            break
         }
         feedback.release()
         phase = .off
@@ -216,6 +224,15 @@ final class SessionCounter: ObservableObject {
                 feedback.locked()
             case .reps(let n):
                 feedback.rep(n)
+            case .tooShort(let rec, let samples):
+                // Not a set: nothing logged, nothing announced, no entry on the wrist.
+                // The recording is still kept, marked cancelled, because a detection
+                // the threshold rejected is a labelled false positive and there is no
+                // other way to produce one.
+                count = 0
+                CaptureUploader.upload(samples, verdict: rec, exercise: armedExercise,
+                                       weightLbs: armedWeight, cancelled: true)
+                feedback.release()
             case .closed(let rec, let samples):
                 // The log carries the conservative count, which can be one below
                 // what was announced. The record is the authority, not the haptics.
