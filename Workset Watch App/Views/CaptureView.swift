@@ -1,4 +1,5 @@
 import SwiftUI
+import RepCounter
 
 /// Records a set WITHOUT counting it — how new reference recordings get made.
 ///

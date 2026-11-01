@@ -1,0 +1,782 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		044A0CB105930FB1AC6DF654 /* n7.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3D40DD18FC79573D4967969C /* n7.wav */; };
+		04B2F7304090BB562DC73591 /* n21.wav in Resources */ = {isa = PBXBuildFile; fileRef = 29B12D3F428EF94CF30D8541 /* n21.wav */; };
+		084D82347C345F9BD18C6D11 /* n39.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A8223E60F083185917074 /* n39.wav */; };
+		0AD88DAA069BC86985BC8C10 /* n24.wav in Resources */ = {isa = PBXBuildFile; fileRef = B560B2DF5579D1D716CE31C8 /* n24.wav */; };
+		0B65D2F6F53D3EE159EC49FB /* WorkoutKeepAlive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D19D0B420029CE30C46615 /* WorkoutKeepAlive.swift */; };
+		0B6962C06B9E910BD71C977F /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C217988D6800771CE04B376 /* SessionView.swift */; };
+		15CF354C1F2F462C5F8FB6D9 /* n8.wav in Resources */ = {isa = PBXBuildFile; fileRef = BC7898F6AF0363875B00E2C0 /* n8.wav */; };
+		1668F8F1238DFA54F6F600BC /* Workset Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 171D46DD0DA9E270AD3FC8F2 /* Workset Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		16D9043A75DE79B778B5D1F7 /* n10.wav in Resources */ = {isa = PBXBuildFile; fileRef = 09ACDBA3B98F02EDBD43A23D /* n10.wav */; };
+		17F5940232F4C80249EDE553 /* n46.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0D38C2E0B78CDFFC3F07C77E /* n46.wav */; };
+		1B2EB9CA2513BE68595FDC6C /* n20.wav in Resources */ = {isa = PBXBuildFile; fileRef = DDDABA922639D8EE49B9851E /* n20.wav */; };
+		1B4D02317C583D0EF9926746 /* n38.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7E891F6247985B5A0C245071 /* n38.wav */; };
+		1E06A6003A066304E7A82F61 /* locked.wav in Resources */ = {isa = PBXBuildFile; fileRef = AD9F93DCD560D0A87C5F3DEA /* locked.wav */; };
+		2074D3A2A2129500C8E65FD1 /* n6.wav in Resources */ = {isa = PBXBuildFile; fileRef = 271AC1B1AA4C770A61689909 /* n6.wav */; };
+		21EB9C2F112F4E74F45CE952 /* n2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C73C39168DE500AC4EB7ABF /* n2.wav */; };
+		234B28E4300CD311389BF1CC /* n14.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1714A16E7FDA0187F1682A27 /* n14.wav */; };
+		23843458F7636B015112AC6B /* n4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 609E55EBAEC9D715427A1907 /* n4.wav */; };
+		253212BE2449A65E919569E0 /* n44.wav in Resources */ = {isa = PBXBuildFile; fileRef = D44C5E65694A8C1592CDCB0F /* n44.wav */; };
+		329C699EB7AE8E2F289682B1 /* n1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9911EF8BD323146A44EDD42E /* n1.wav */; };
+		33FDC0D5219F1CB2F22FF4BB /* n17.wav in Resources */ = {isa = PBXBuildFile; fileRef = 04C1D1463D1AD1A549C3C27F /* n17.wav */; };
+		359EC0A94EDEF3C814757959 /* n9.wav in Resources */ = {isa = PBXBuildFile; fileRef = DB9DD9ED80B3AEF90FFEB9FE /* n9.wav */; };
+		3614D39AFDB921C0FF79C7FF /* n16.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F46C59730F1048D540560E3 /* n16.wav */; };
+		3DBBC17014167BD281E8A86D /* rep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 369C3726F5420C332D1FFBA2 /* rep.wav */; };
+		3E0F62DC24BFEC39C08C2487 /* n3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 49AA196D7773CA028DF2B88F /* n3.wav */; };
+		4B670F810E9A7E4A0D99CB5B /* n42.wav in Resources */ = {isa = PBXBuildFile; fileRef = AD4009C249FD51F3B623D5F7 /* n42.wav */; };
+		4C0BCA687B302B1FE6FCC00B /* n28.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8CA1D752589D50A2A0A5BF62 /* n28.wav */; };
+		4D55DD2E062D4B6D377AE53F /* ManualSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC06B627E4F6850093ABEBD0 /* ManualSetView.swift */; };
+		4F409E6EFE72A5183BB686F2 /* n18.wav in Resources */ = {isa = PBXBuildFile; fileRef = FBCA7ABFF430DEDAED926047 /* n18.wav */; };
+		5184D138AE0B50682683B532 /* n26.wav in Resources */ = {isa = PBXBuildFile; fileRef = CE1150F006ECA1AA2E6BC289 /* n26.wav */; };
+		59D3BC1D0EFC95B7826AC49F /* n11.wav in Resources */ = {isa = PBXBuildFile; fileRef = 59195B3CE7C83E39156B0E77 /* n11.wav */; };
+		5A0F2E3E8BB90196D079A74B /* n35.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A6D13256FFFBE89DDE5C3 /* n35.wav */; };
+		5AE6324DFC024BAE68CBC900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99A2CEB649F1708F8C5BF939 /* Assets.xcassets */; };
+		5C5099C1AA53B3E45F408E7B /* WorksetWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B354A5256622E1AC40DA0D91 /* WorksetWatchApp.swift */; };
+		5CDD973DD3F7C880CF5FDF46 /* n12.wav in Resources */ = {isa = PBXBuildFile; fileRef = F87498FE8FBCAD3E836F667B /* n12.wav */; };
+		5D27638E20FDBDD4889DC11C /* n23.wav in Resources */ = {isa = PBXBuildFile; fileRef = E5F91B12A872AC0197C7BFC4 /* n23.wav */; };
+		6A954C173F94C4C250DC934D /* n15.wav in Resources */ = {isa = PBXBuildFile; fileRef = 783F8B3B28441FA22BB2B888 /* n15.wav */; };
+		6BC1DE8CABCC10268DD2392A /* n22.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2974BD0CCBB79E79F1E8F68C /* n22.wav */; };
+		71627BDF34501096F3D1F50E /* RepCounter in Frameworks */ = {isa = PBXBuildFile; productRef = D9B1A2731CB48BC12239302C /* RepCounter */; };
+		718A3CFFEB210D0AA4612DE5 /* n25.wav in Resources */ = {isa = PBXBuildFile; fileRef = DE17F081F1312F3CBBCBD037 /* n25.wav */; };
+		7576BD75635A9105FA77648C /* CaptureUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F57F222DCF441D6D42D839C /* CaptureUploader.swift */; };
+		761F3F8B2BAEA12A39632A4E /* n13.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1C9218CFC004E912BCBCCC63 /* n13.wav */; };
+		816216BFD1283D5063A4917A /* n43.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1F42FA08E42D79B766FA0524 /* n43.wav */; };
+		82C595BD885D9F5C3F55E6A6 /* n27.wav in Resources */ = {isa = PBXBuildFile; fileRef = D28E1252CDFE01C98A7A3063 /* n27.wav */; };
+		865BDD9E565CF2C159798FDB /* n50.wav in Resources */ = {isa = PBXBuildFile; fileRef = C8649CEFE536900DA52B476E /* n50.wav */; };
+		8923EE1CF26F5FAC7B5CA024 /* n47.wav in Resources */ = {isa = PBXBuildFile; fileRef = B21B4058AD6AC96C2B91933E /* n47.wav */; };
+		8D8A5441CB0BFC3ACD056309 /* n19.wav in Resources */ = {isa = PBXBuildFile; fileRef = EE9968730874C3A5C33ED1B3 /* n19.wav */; };
+		92999F1A4D0B83AB7B0A3E3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C36B3D3E1B6FF7DADC63B9B /* Assets.xcassets */; };
+		95E99F0138AC96D8D9697E0F /* n5.wav in Resources */ = {isa = PBXBuildFile; fileRef = 826A7F13C1604550E25AF323 /* n5.wav */; };
+		978DEA56977F8FAFC5B842CF /* n31.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1B962B90172650606270B15 /* n31.wav */; };
+		983BF2486D5EC06E9C660CB9 /* n41.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4FB6130B7C06F377548EAA8D /* n41.wav */; };
+		9F9ED08554BD4988D3F87D9E /* WorksetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236F8FC8B10F2859B03D2976 /* WorksetApp.swift */; };
+		9FF3283A1C6D917B1E7C85D5 /* n30.wav in Resources */ = {isa = PBXBuildFile; fileRef = 04AD490C54B4608F17EFF4BA /* n30.wav */; };
+		A0FCE7DFC60486257F962A7C /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC28BB7BB4F171956789D95 /* CaptureView.swift */; };
+		A2628B0DA744A1B0014DF852 /* n45.wav in Resources */ = {isa = PBXBuildFile; fileRef = 86A78F9AA19222E82F791EC6 /* n45.wav */; };
+		A9FCAB0768CE0AA5ADBE4565 /* CaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65DB418F7BBC5B331B7687 /* CaptureManager.swift */; };
+		AD89D3C216EC9A2D06365DDA /* WatchHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41843E3D3FF34833233598 /* WatchHomeView.swift */; };
+		B3E9D1C1FFCA0E0E0E93591D /* n32.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5410F3AECC68711EA03C2CA8 /* n32.wav */; };
+		BA71B6B084080528D51BCF29 /* n40.wav in Resources */ = {isa = PBXBuildFile; fileRef = 93BF5E357FB0BF16C571BA0E /* n40.wav */; };
+		CB70D0FFE1697F0A5EBDECB6 /* PhoneHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E7B9EE940F67A718F0B88 /* PhoneHomeView.swift */; };
+		D123DF23507E8267DC8D52AC /* n34.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6966447CB911C16CF7A61E14 /* n34.wav */; };
+		D1702B37CB175671465FC0C5 /* n37.wav in Resources */ = {isa = PBXBuildFile; fileRef = BA0114304DA3D19E22798E41 /* n37.wav */; };
+		D446B0452E2B8CD1FA8E3AED /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAC450701365415C87C2295 /* Feedback.swift */; };
+		D8A3729629B3116578E12798 /* SessionCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAEE3ACAA3B96459508F327 /* SessionCounter.swift */; };
+		D99B9DD253664C19A7B2C982 /* n36.wav in Resources */ = {isa = PBXBuildFile; fileRef = 327A5C92357BC8707D7CDD5A /* n36.wav */; };
+		D9C5B4778C5911915B29570C /* SetReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C97015A9986F777720A957 /* SetReporter.swift */; };
+		E5758CC1AD9538DC34B9871E /* n33.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1DED0A82C37C960D325B7A22 /* n33.wav */; };
+		E985FC62860CCA2270501C7E /* ActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D5D34FD6D6F542E54A0FD4 /* ActivityMonitor.swift */; };
+		E992D3461915E3A8A293707B /* n49.wav in Resources */ = {isa = PBXBuildFile; fileRef = F5E0076201F0357B42ED445C /* n49.wav */; };
+		ECD16A917A773945B66951B3 /* n48.wav in Resources */ = {isa = PBXBuildFile; fileRef = F12F17193B9067727C42B4A7 /* n48.wav */; };
+		F4434807399600A55E1A58A3 /* n29.wav in Resources */ = {isa = PBXBuildFile; fileRef = DCD131659298E1ECEFC149AA /* n29.wav */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		642F2DD33BBF28BC71EFDE75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFBB3BD5E2A7F9100BA9F06A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F6E0465BF3A56E26D6E46937;
+			remoteInfo = "Workset Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		75C41C7EA66D133D2BA335D1 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				1668F8F1238DFA54F6F600BC /* Workset Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		04AD490C54B4608F17EFF4BA /* n30.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n30.wav; sourceTree = "<group>"; };
+		04C1D1463D1AD1A549C3C27F /* n17.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n17.wav; sourceTree = "<group>"; };
+		09ACDBA3B98F02EDBD43A23D /* n10.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n10.wav; sourceTree = "<group>"; };
+		0D38C2E0B78CDFFC3F07C77E /* n46.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n46.wav; sourceTree = "<group>"; };
+		1714A16E7FDA0187F1682A27 /* n14.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n14.wav; sourceTree = "<group>"; };
+		171D46DD0DA9E270AD3FC8F2 /* Workset Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Workset Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C36B3D3E1B6FF7DADC63B9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1C9218CFC004E912BCBCCC63 /* n13.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n13.wav; sourceTree = "<group>"; };
+		1DAC450701365415C87C2295 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		1DED0A82C37C960D325B7A22 /* n33.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n33.wav; sourceTree = "<group>"; };
+		1F42FA08E42D79B766FA0524 /* n43.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n43.wav; sourceTree = "<group>"; };
+		236F8FC8B10F2859B03D2976 /* WorksetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksetApp.swift; sourceTree = "<group>"; };
+		271AC1B1AA4C770A61689909 /* n6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n6.wav; sourceTree = "<group>"; };
+		2974BD0CCBB79E79F1E8F68C /* n22.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n22.wav; sourceTree = "<group>"; };
+		29B12D3F428EF94CF30D8541 /* n21.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n21.wav; sourceTree = "<group>"; };
+		2B65DB418F7BBC5B331B7687 /* CaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureManager.swift; sourceTree = "<group>"; };
+		327A5C92357BC8707D7CDD5A /* n36.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n36.wav; sourceTree = "<group>"; };
+		369C3726F5420C332D1FFBA2 /* rep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rep.wav; sourceTree = "<group>"; };
+		36C97015A9986F777720A957 /* SetReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetReporter.swift; sourceTree = "<group>"; };
+		3D40DD18FC79573D4967969C /* n7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n7.wav; sourceTree = "<group>"; };
+		3F46C59730F1048D540560E3 /* n16.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n16.wav; sourceTree = "<group>"; };
+		430A8223E60F083185917074 /* n39.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n39.wav; sourceTree = "<group>"; };
+		49AA196D7773CA028DF2B88F /* n3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n3.wav; sourceTree = "<group>"; };
+		4CC28BB7BB4F171956789D95 /* CaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureView.swift; sourceTree = "<group>"; };
+		4FB6130B7C06F377548EAA8D /* n41.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n41.wav; sourceTree = "<group>"; };
+		53D19D0B420029CE30C46615 /* WorkoutKeepAlive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutKeepAlive.swift; sourceTree = "<group>"; };
+		5410F3AECC68711EA03C2CA8 /* n32.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n32.wav; sourceTree = "<group>"; };
+		59195B3CE7C83E39156B0E77 /* n11.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n11.wav; sourceTree = "<group>"; };
+		609E55EBAEC9D715427A1907 /* n4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n4.wav; sourceTree = "<group>"; };
+		6966447CB911C16CF7A61E14 /* n34.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n34.wav; sourceTree = "<group>"; };
+		6C73C39168DE500AC4EB7ABF /* n2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n2.wav; sourceTree = "<group>"; };
+		6F57F222DCF441D6D42D839C /* CaptureUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureUploader.swift; sourceTree = "<group>"; };
+		783F8B3B28441FA22BB2B888 /* n15.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n15.wav; sourceTree = "<group>"; };
+		7C217988D6800771CE04B376 /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		7E891F6247985B5A0C245071 /* n38.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n38.wav; sourceTree = "<group>"; };
+		826A7F13C1604550E25AF323 /* n5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n5.wav; sourceTree = "<group>"; };
+		86A78F9AA19222E82F791EC6 /* n45.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n45.wav; sourceTree = "<group>"; };
+		8C41843E3D3FF34833233598 /* WatchHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchHomeView.swift; sourceTree = "<group>"; };
+		8CA1D752589D50A2A0A5BF62 /* n28.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n28.wav; sourceTree = "<group>"; };
+		8E1A6D13256FFFBE89DDE5C3 /* n35.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n35.wav; sourceTree = "<group>"; };
+		93BF5E357FB0BF16C571BA0E /* n40.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n40.wav; sourceTree = "<group>"; };
+		9577606347170C567D99CAEC /* Workset.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Workset.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9911EF8BD323146A44EDD42E /* n1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n1.wav; sourceTree = "<group>"; };
+		99A2CEB649F1708F8C5BF939 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		99D5D34FD6D6F542E54A0FD4 /* ActivityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMonitor.swift; sourceTree = "<group>"; };
+		9AAEE3ACAA3B96459508F327 /* SessionCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCounter.swift; sourceTree = "<group>"; };
+		9D6E7B9EE940F67A718F0B88 /* PhoneHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneHomeView.swift; sourceTree = "<group>"; };
+		AD4009C249FD51F3B623D5F7 /* n42.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n42.wav; sourceTree = "<group>"; };
+		AD9F93DCD560D0A87C5F3DEA /* locked.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = locked.wav; sourceTree = "<group>"; };
+		B21B4058AD6AC96C2B91933E /* n47.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n47.wav; sourceTree = "<group>"; };
+		B354A5256622E1AC40DA0D91 /* WorksetWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksetWatchApp.swift; sourceTree = "<group>"; };
+		B560B2DF5579D1D716CE31C8 /* n24.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n24.wav; sourceTree = "<group>"; };
+		BA0114304DA3D19E22798E41 /* n37.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n37.wav; sourceTree = "<group>"; };
+		BC7898F6AF0363875B00E2C0 /* n8.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n8.wav; sourceTree = "<group>"; };
+		C8649CEFE536900DA52B476E /* n50.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n50.wav; sourceTree = "<group>"; };
+		CBEF513A00CBAD4F75E306BD /* Workset Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Workset Watch App.entitlements"; sourceTree = "<group>"; };
+		CE1150F006ECA1AA2E6BC289 /* n26.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n26.wav; sourceTree = "<group>"; };
+		D1B962B90172650606270B15 /* n31.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n31.wav; sourceTree = "<group>"; };
+		D28E1252CDFE01C98A7A3063 /* n27.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n27.wav; sourceTree = "<group>"; };
+		D44C5E65694A8C1592CDCB0F /* n44.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n44.wav; sourceTree = "<group>"; };
+		DB9DD9ED80B3AEF90FFEB9FE /* n9.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n9.wav; sourceTree = "<group>"; };
+		DCD131659298E1ECEFC149AA /* n29.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n29.wav; sourceTree = "<group>"; };
+		DDDABA922639D8EE49B9851E /* n20.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n20.wav; sourceTree = "<group>"; };
+		DE17F081F1312F3CBBCBD037 /* n25.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n25.wav; sourceTree = "<group>"; };
+		E5F91B12A872AC0197C7BFC4 /* n23.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n23.wav; sourceTree = "<group>"; };
+		EC06B627E4F6850093ABEBD0 /* ManualSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualSetView.swift; sourceTree = "<group>"; };
+		EE9968730874C3A5C33ED1B3 /* n19.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n19.wav; sourceTree = "<group>"; };
+		F12F17193B9067727C42B4A7 /* n48.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n48.wav; sourceTree = "<group>"; };
+		F5E0076201F0357B42ED445C /* n49.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n49.wav; sourceTree = "<group>"; };
+		F87498FE8FBCAD3E836F667B /* n12.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n12.wav; sourceTree = "<group>"; };
+		FBCA7ABFF430DEDAED926047 /* n18.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n18.wav; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C923793C2DE22EC820BBBB96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71627BDF34501096F3D1F50E /* RepCounter in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		333CC212CFC93B1D627AFE5C /* Workset Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				99A2CEB649F1708F8C5BF939 /* Assets.xcassets */,
+				CBEF513A00CBAD4F75E306BD /* Workset Watch App.entitlements */,
+				B354A5256622E1AC40DA0D91 /* WorksetWatchApp.swift */,
+				AF2CFF53A80E9E3126F715D5 /* Numbers */,
+				4711E743814D1B586FB9BFC2 /* Services */,
+				9AC0FD0AD3C8CE9217C1ED2D /* Sounds */,
+				A7B448075E23A6367642BA0E /* Views */,
+			);
+			path = "Workset Watch App";
+			sourceTree = "<group>";
+		};
+		4711E743814D1B586FB9BFC2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				99D5D34FD6D6F542E54A0FD4 /* ActivityMonitor.swift */,
+				2B65DB418F7BBC5B331B7687 /* CaptureManager.swift */,
+				6F57F222DCF441D6D42D839C /* CaptureUploader.swift */,
+				1DAC450701365415C87C2295 /* Feedback.swift */,
+				9AAEE3ACAA3B96459508F327 /* SessionCounter.swift */,
+				36C97015A9986F777720A957 /* SetReporter.swift */,
+				53D19D0B420029CE30C46615 /* WorkoutKeepAlive.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9AC0FD0AD3C8CE9217C1ED2D /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				AD9F93DCD560D0A87C5F3DEA /* locked.wav */,
+				369C3726F5420C332D1FFBA2 /* rep.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		A7B448075E23A6367642BA0E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4CC28BB7BB4F171956789D95 /* CaptureView.swift */,
+				EC06B627E4F6850093ABEBD0 /* ManualSetView.swift */,
+				7C217988D6800771CE04B376 /* SessionView.swift */,
+				8C41843E3D3FF34833233598 /* WatchHomeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AF2CFF53A80E9E3126F715D5 /* Numbers */ = {
+			isa = PBXGroup;
+			children = (
+				9911EF8BD323146A44EDD42E /* n1.wav */,
+				6C73C39168DE500AC4EB7ABF /* n2.wav */,
+				49AA196D7773CA028DF2B88F /* n3.wav */,
+				609E55EBAEC9D715427A1907 /* n4.wav */,
+				826A7F13C1604550E25AF323 /* n5.wav */,
+				271AC1B1AA4C770A61689909 /* n6.wav */,
+				3D40DD18FC79573D4967969C /* n7.wav */,
+				BC7898F6AF0363875B00E2C0 /* n8.wav */,
+				DB9DD9ED80B3AEF90FFEB9FE /* n9.wav */,
+				09ACDBA3B98F02EDBD43A23D /* n10.wav */,
+				59195B3CE7C83E39156B0E77 /* n11.wav */,
+				F87498FE8FBCAD3E836F667B /* n12.wav */,
+				1C9218CFC004E912BCBCCC63 /* n13.wav */,
+				1714A16E7FDA0187F1682A27 /* n14.wav */,
+				783F8B3B28441FA22BB2B888 /* n15.wav */,
+				3F46C59730F1048D540560E3 /* n16.wav */,
+				04C1D1463D1AD1A549C3C27F /* n17.wav */,
+				FBCA7ABFF430DEDAED926047 /* n18.wav */,
+				EE9968730874C3A5C33ED1B3 /* n19.wav */,
+				DDDABA922639D8EE49B9851E /* n20.wav */,
+				29B12D3F428EF94CF30D8541 /* n21.wav */,
+				2974BD0CCBB79E79F1E8F68C /* n22.wav */,
+				E5F91B12A872AC0197C7BFC4 /* n23.wav */,
+				B560B2DF5579D1D716CE31C8 /* n24.wav */,
+				DE17F081F1312F3CBBCBD037 /* n25.wav */,
+				CE1150F006ECA1AA2E6BC289 /* n26.wav */,
+				D28E1252CDFE01C98A7A3063 /* n27.wav */,
+				8CA1D752589D50A2A0A5BF62 /* n28.wav */,
+				DCD131659298E1ECEFC149AA /* n29.wav */,
+				04AD490C54B4608F17EFF4BA /* n30.wav */,
+				D1B962B90172650606270B15 /* n31.wav */,
+				5410F3AECC68711EA03C2CA8 /* n32.wav */,
+				1DED0A82C37C960D325B7A22 /* n33.wav */,
+				6966447CB911C16CF7A61E14 /* n34.wav */,
+				8E1A6D13256FFFBE89DDE5C3 /* n35.wav */,
+				327A5C92357BC8707D7CDD5A /* n36.wav */,
+				BA0114304DA3D19E22798E41 /* n37.wav */,
+				7E891F6247985B5A0C245071 /* n38.wav */,
+				430A8223E60F083185917074 /* n39.wav */,
+				93BF5E357FB0BF16C571BA0E /* n40.wav */,
+				4FB6130B7C06F377548EAA8D /* n41.wav */,
+				AD4009C249FD51F3B623D5F7 /* n42.wav */,
+				1F42FA08E42D79B766FA0524 /* n43.wav */,
+				D44C5E65694A8C1592CDCB0F /* n44.wav */,
+				86A78F9AA19222E82F791EC6 /* n45.wav */,
+				0D38C2E0B78CDFFC3F07C77E /* n46.wav */,
+				B21B4058AD6AC96C2B91933E /* n47.wav */,
+				F12F17193B9067727C42B4A7 /* n48.wav */,
+				F5E0076201F0357B42ED445C /* n49.wav */,
+				C8649CEFE536900DA52B476E /* n50.wav */,
+			);
+			path = Numbers;
+			sourceTree = "<group>";
+		};
+		C6CC90E565CD38EF6F08C6CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				171D46DD0DA9E270AD3FC8F2 /* Workset Watch App.app */,
+				9577606347170C567D99CAEC /* Workset.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DF189B5FB96CD45E9D720229 /* Workset */ = {
+			isa = PBXGroup;
+			children = (
+				1C36B3D3E1B6FF7DADC63B9B /* Assets.xcassets */,
+				9D6E7B9EE940F67A718F0B88 /* PhoneHomeView.swift */,
+				236F8FC8B10F2859B03D2976 /* WorksetApp.swift */,
+			);
+			path = Workset;
+			sourceTree = "<group>";
+		};
+		E7EDBC0738AF629FA41035B2 = {
+			isa = PBXGroup;
+			children = (
+				DF189B5FB96CD45E9D720229 /* Workset */,
+				333CC212CFC93B1D627AFE5C /* Workset Watch App */,
+				C6CC90E565CD38EF6F08C6CC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E02D61B92E0AC69D08CBAC9B /* Workset */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4A34C90593C36F13525ED25 /* Build configuration list for PBXNativeTarget "Workset" */;
+			buildPhases = (
+				9944973438025CD6A5949A6D /* Sources */,
+				6A3E3EB64A73472F893477CB /* Resources */,
+				75C41C7EA66D133D2BA335D1 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A2E5E78011758189C67766AC /* PBXTargetDependency */,
+			);
+			name = Workset;
+			packageProductDependencies = (
+			);
+			productName = Workset;
+			productReference = 9577606347170C567D99CAEC /* Workset.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F6E0465BF3A56E26D6E46937 /* Workset Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CA3A6E46B0C61891CD9C51B /* Build configuration list for PBXNativeTarget "Workset Watch App" */;
+			buildPhases = (
+				A8711D97072FCE6BF6924FB7 /* Sources */,
+				4BD2420EE2C53F499E69DB85 /* Resources */,
+				C923793C2DE22EC820BBBB96 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Workset Watch App";
+			packageProductDependencies = (
+				D9B1A2731CB48BC12239302C /* RepCounter */,
+			);
+			productName = "Workset Watch App";
+			productReference = 171D46DD0DA9E270AD3FC8F2 /* Workset Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AFBB3BD5E2A7F9100BA9F06A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					E02D61B92E0AC69D08CBAC9B = {
+						DevelopmentTeam = XMH4AVFC78;
+					};
+					F6E0465BF3A56E26D6E46937 = {
+						DevelopmentTeam = XMH4AVFC78;
+					};
+				};
+			};
+			buildConfigurationList = 3EFB039BECD89603C76EC6E0 /* Build configuration list for PBXProject "Workset" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = E7EDBC0738AF629FA41035B2;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D216D4038116C614A222656B /* XCRemoteSwiftPackageReference "Workset-Algorithms" */,
+			);
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E02D61B92E0AC69D08CBAC9B /* Workset */,
+				F6E0465BF3A56E26D6E46937 /* Workset Watch App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4BD2420EE2C53F499E69DB85 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AE6324DFC024BAE68CBC900 /* Assets.xcassets in Resources */,
+				1E06A6003A066304E7A82F61 /* locked.wav in Resources */,
+				329C699EB7AE8E2F289682B1 /* n1.wav in Resources */,
+				16D9043A75DE79B778B5D1F7 /* n10.wav in Resources */,
+				59D3BC1D0EFC95B7826AC49F /* n11.wav in Resources */,
+				5CDD973DD3F7C880CF5FDF46 /* n12.wav in Resources */,
+				761F3F8B2BAEA12A39632A4E /* n13.wav in Resources */,
+				234B28E4300CD311389BF1CC /* n14.wav in Resources */,
+				6A954C173F94C4C250DC934D /* n15.wav in Resources */,
+				3614D39AFDB921C0FF79C7FF /* n16.wav in Resources */,
+				33FDC0D5219F1CB2F22FF4BB /* n17.wav in Resources */,
+				4F409E6EFE72A5183BB686F2 /* n18.wav in Resources */,
+				8D8A5441CB0BFC3ACD056309 /* n19.wav in Resources */,
+				21EB9C2F112F4E74F45CE952 /* n2.wav in Resources */,
+				1B2EB9CA2513BE68595FDC6C /* n20.wav in Resources */,
+				04B2F7304090BB562DC73591 /* n21.wav in Resources */,
+				6BC1DE8CABCC10268DD2392A /* n22.wav in Resources */,
+				5D27638E20FDBDD4889DC11C /* n23.wav in Resources */,
+				0AD88DAA069BC86985BC8C10 /* n24.wav in Resources */,
+				718A3CFFEB210D0AA4612DE5 /* n25.wav in Resources */,
+				5184D138AE0B50682683B532 /* n26.wav in Resources */,
+				82C595BD885D9F5C3F55E6A6 /* n27.wav in Resources */,
+				4C0BCA687B302B1FE6FCC00B /* n28.wav in Resources */,
+				F4434807399600A55E1A58A3 /* n29.wav in Resources */,
+				3E0F62DC24BFEC39C08C2487 /* n3.wav in Resources */,
+				9FF3283A1C6D917B1E7C85D5 /* n30.wav in Resources */,
+				978DEA56977F8FAFC5B842CF /* n31.wav in Resources */,
+				B3E9D1C1FFCA0E0E0E93591D /* n32.wav in Resources */,
+				E5758CC1AD9538DC34B9871E /* n33.wav in Resources */,
+				D123DF23507E8267DC8D52AC /* n34.wav in Resources */,
+				5A0F2E3E8BB90196D079A74B /* n35.wav in Resources */,
+				D99B9DD253664C19A7B2C982 /* n36.wav in Resources */,
+				D1702B37CB175671465FC0C5 /* n37.wav in Resources */,
+				1B4D02317C583D0EF9926746 /* n38.wav in Resources */,
+				084D82347C345F9BD18C6D11 /* n39.wav in Resources */,
+				23843458F7636B015112AC6B /* n4.wav in Resources */,
+				BA71B6B084080528D51BCF29 /* n40.wav in Resources */,
+				983BF2486D5EC06E9C660CB9 /* n41.wav in Resources */,
+				4B670F810E9A7E4A0D99CB5B /* n42.wav in Resources */,
+				816216BFD1283D5063A4917A /* n43.wav in Resources */,
+				253212BE2449A65E919569E0 /* n44.wav in Resources */,
+				A2628B0DA744A1B0014DF852 /* n45.wav in Resources */,
+				17F5940232F4C80249EDE553 /* n46.wav in Resources */,
+				8923EE1CF26F5FAC7B5CA024 /* n47.wav in Resources */,
+				ECD16A917A773945B66951B3 /* n48.wav in Resources */,
+				E992D3461915E3A8A293707B /* n49.wav in Resources */,
+				95E99F0138AC96D8D9697E0F /* n5.wav in Resources */,
+				865BDD9E565CF2C159798FDB /* n50.wav in Resources */,
+				2074D3A2A2129500C8E65FD1 /* n6.wav in Resources */,
+				044A0CB105930FB1AC6DF654 /* n7.wav in Resources */,
+				15CF354C1F2F462C5F8FB6D9 /* n8.wav in Resources */,
+				359EC0A94EDEF3C814757959 /* n9.wav in Resources */,
+				3DBBC17014167BD281E8A86D /* rep.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A3E3EB64A73472F893477CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92999F1A4D0B83AB7B0A3E3F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9944973438025CD6A5949A6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB70D0FFE1697F0A5EBDECB6 /* PhoneHomeView.swift in Sources */,
+				9F9ED08554BD4988D3F87D9E /* WorksetApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8711D97072FCE6BF6924FB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E985FC62860CCA2270501C7E /* ActivityMonitor.swift in Sources */,
+				A9FCAB0768CE0AA5ADBE4565 /* CaptureManager.swift in Sources */,
+				7576BD75635A9105FA77648C /* CaptureUploader.swift in Sources */,
+				A0FCE7DFC60486257F962A7C /* CaptureView.swift in Sources */,
+				D446B0452E2B8CD1FA8E3AED /* Feedback.swift in Sources */,
+				4D55DD2E062D4B6D377AE53F /* ManualSetView.swift in Sources */,
+				D8A3729629B3116578E12798 /* SessionCounter.swift in Sources */,
+				0B6962C06B9E910BD71C977F /* SessionView.swift in Sources */,
+				D9C5B4778C5911915B29570C /* SetReporter.swift in Sources */,
+				AD89D3C216EC9A2D06365DDA /* WatchHomeView.swift in Sources */,
+				0B65D2F6F53D3EE159EC49FB /* WorkoutKeepAlive.swift in Sources */,
+				5C5099C1AA53B3E45F408E7B /* WorksetWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A2E5E78011758189C67766AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F6E0465BF3A56E26D6E46937 /* Workset Watch App */;
+			targetProxy = 642F2DD33BBF28BC71EFDE75 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		47A4E20E91911B61AD19B80A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Workset Watch App/Workset Watch App.entitlements";
+				INFOPLIST_KEY_CFBundleDisplayName = Watchset;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Watchset reads workout data to keep rep counting alive while your wrist is down.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Watchset records a workout session so rep counting continues during your set.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Watchset uses wrist motion to count your repetitions.";
+				INFOPLIST_KEY_WKBackgroundModes = "workout-processing";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.jaredgantt.workset;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaredgantt.workset.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		491657A45F39BDCC7C849675 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = Watchset;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Watchset reads workout data to keep rep counting alive while your wrist is down.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Watchset records a workout session so rep counting continues during your set.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Watchset uses wrist motion to count your repetitions.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaredgantt.workset;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		8F0138714B5083AC8BE9A294 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 21;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = XMH4AVFC78;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		A3AE10882035E104FDB3301E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = Watchset;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Watchset reads workout data to keep rep counting alive while your wrist is down.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Watchset records a workout session so rep counting continues during your set.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Watchset uses wrist motion to count your repetitions.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaredgantt.workset;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		E9AAEEE98F5B180A3B6F77A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 21;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = XMH4AVFC78;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
+		F6F8471042A7CBF0606A9814 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Workset Watch App/Workset Watch App.entitlements";
+				INFOPLIST_KEY_CFBundleDisplayName = Watchset;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Watchset reads workout data to keep rep counting alive while your wrist is down.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Watchset records a workout session so rep counting continues during your set.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Watchset uses wrist motion to count your repetitions.";
+				INFOPLIST_KEY_WKBackgroundModes = "workout-processing";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.jaredgantt.workset;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaredgantt.workset.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3EFB039BECD89603C76EC6E0 /* Build configuration list for PBXProject "Workset" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F0138714B5083AC8BE9A294 /* Debug */,
+				E9AAEEE98F5B180A3B6F77A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4CA3A6E46B0C61891CD9C51B /* Build configuration list for PBXNativeTarget "Workset Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47A4E20E91911B61AD19B80A /* Debug */,
+				F6F8471042A7CBF0606A9814 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E4A34C90593C36F13525ED25 /* Build configuration list for PBXNativeTarget "Workset" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				491657A45F39BDCC7C849675 /* Debug */,
+				A3AE10882035E104FDB3301E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D216D4038116C614A222656B /* XCRemoteSwiftPackageReference "Workset-Algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:JJGantt/Workset-Algorithms.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D9B1A2731CB48BC12239302C /* RepCounter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D216D4038116C614A222656B /* XCRemoteSwiftPackageReference "Workset-Algorithms" */;
+			productName = RepCounter;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = AFBB3BD5E2A7F9100BA9F06A /* Project object */;
+}

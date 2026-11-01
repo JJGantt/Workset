@@ -4,8 +4,14 @@ options:
   deploymentTarget:
     iOS: "18.0"
     watchOS: "11.0"
-    macOS: "14.0"
   createIntermediateGroups: true
+
+packages:
+  # The rep counter, from a private package. Interface/RepCounter.swiftinterface is
+  # its public surface.
+  RepCounter:
+    url: git@github.com:JJGantt/Workset-Algorithms.git
+    exactVersion: 1.0.0
 
 settings:
   base:
@@ -52,7 +58,8 @@ targets:
     platform: watchOS
     sources:
       - "Workset Watch App"
-      - Algorithm/Swift
+    dependencies:
+      - package: RepCounter
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.workset.watchkitapp
@@ -70,15 +77,3 @@ targets:
         INFOPLIST_KEY_NSHealthUpdateUsageDescription: "Watchset records a workout session so rep counting continues during your set."
         INFOPLIST_KEY_NSMotionUsageDescription: "Watchset uses wrist motion to count your repetitions."
         INFOPLIST_KEY_WKBackgroundModes: workout-processing
-
-  workset-verify:
-    type: tool
-    platform: macOS
-    sources:
-      - Algorithm/Swift
-      - Tools/Verify
-    settings:
-      base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.jaredgantt.workset.verify
-        CODE_SIGN_IDENTITY: "-"
-        CODE_SIGNING_REQUIRED: NO

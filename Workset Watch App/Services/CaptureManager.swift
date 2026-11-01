@@ -1,5 +1,6 @@
 import Foundation
 import CoreMotion
+import RepCounter
 
 /// Records one contiguous set of device motion.
 ///

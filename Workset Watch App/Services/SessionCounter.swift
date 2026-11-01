@@ -1,5 +1,6 @@
 import Foundation
 import WatchKit
+import RepCounter
 
 /// Drives `SessionMachine` on the watch: timers, threading, haptics, published state.
 ///

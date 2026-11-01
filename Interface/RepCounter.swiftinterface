@@ -1,0 +1,83 @@
+// The public interface of RepCounter, the package the watch app counts reps through.
+// Generated from the package's public declarations; do not edit by hand.
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public enum AlgorithmVersion {
+  public static let current: Swift.String
+  public static let note: Swift.String
+}
+public enum CaptureFormat {
+  public static func csv(_ samples: [RepCounter.MotionSample], session: Swift.String, verdict: RepCounter.CountedSet?, exercise: Swift.String? = nil, weightLbs: Swift.Double? = nil, cancelled: Swift.Bool = false) -> Swift.String
+}
+public struct MotionSample {
+  public let sensorTime: Foundation.TimeInterval
+  public let userAccel: Swift.SIMD3<Swift.Double>
+  public let rotationRate: Swift.SIMD3<Swift.Double>
+  public let gravity: Swift.SIMD3<Swift.Double>
+  public let attitude: Swift.SIMD3<Swift.Double>
+  public let magAccuracy: Swift.Int
+  public var activityMask: Swift.Int
+  public var activityConfidence: Swift.Int
+  public init(sensorTime: Foundation.TimeInterval, userAccel: Swift.SIMD3<Swift.Double>, rotationRate: Swift.SIMD3<Swift.Double>, gravity: Swift.SIMD3<Swift.Double>, attitude: Swift.SIMD3<Swift.Double>, magAccuracy: Swift.Int, activityMask: Swift.Int = 0, activityConfidence: Swift.Int = -1)
+}
+public struct CaptureQuality {
+  public let spanSeconds: Swift.Double
+  public let coveredSeconds: Swift.Double
+  public let maxGapSeconds: Swift.Double
+  public let sampleCount: Swift.Int
+  public var missingFraction: Swift.Double {
+    get
+  }
+  public var effectiveHz: Swift.Double {
+    get
+  }
+  public var isDegraded: Swift.Bool {
+    get
+  }
+  public static func measure(_ motion: [RepCounter.MotionSample]) -> RepCounter.CaptureQuality
+}
+public struct CountedSet {
+  public let count: Swift.Int
+  public let startedAt: Swift.Double
+  public let endedAt: Swift.Double
+  public let seedSpread: Swift.Double
+  public let travelCm: Swift.Double
+  public let repEnds: [Swift.Double]
+  public let repFired: [Swift.Double]
+  public let algorithm: Swift.String
+  public var duration: Swift.Double {
+    get
+  }
+  public init(count: Swift.Int, startedAt: Swift.Double, endedAt: Swift.Double, seedSpread: Swift.Double, travelCm: Swift.Double, repEnds: [Swift.Double], repFired: [Swift.Double], algorithm: Swift.String)
+}
+public struct SessionMachine {
+  public init()
+  public enum Phase {
+    case armed, counting
+    public static func == (a: RepCounter.SessionMachine.Phase, b: RepCounter.SessionMachine.Phase) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum Event {
+    case committed(Swift.Int)
+    case reps(Swift.Int)
+    case closed(RepCounter.CountedSet, [RepCounter.MotionSample])
+    case tooShort(RepCounter.CountedSet, [RepCounter.MotionSample])
+  }
+  public var phase: RepCounter.SessionMachine.Phase {
+    get
+  }
+  public var count: Swift.Int {
+    get
+  }
+  public mutating func ingest(_ new: [RepCounter.MotionSample]) -> [RepCounter.SessionMachine.Event]
+  public mutating func finish() -> RepCounter.SessionMachine.Event?
+  public mutating func discard() -> [RepCounter.MotionSample]
+}
+extension RepCounter.SessionMachine.Phase : Swift.Equatable {}
+extension RepCounter.SessionMachine.Phase : Swift.Hashable {}
