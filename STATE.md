@@ -29,7 +29,8 @@ holds no counting decisions of its own; it is tested separately against a script
 
 ## Releasing
 
-Bump `CURRENT_PROJECT_VERSION` in `project.yml`, then, with an App Store Connect API key:
+Bump `CURRENT_PROJECT_VERSION` in `project.yml`. `Config/Secrets.xcconfig` must hold the device
+token the data layer accepts (see Data pipeline). Then, with an App Store Connect API key:
 
 ```bash
 xcodegen generate
@@ -68,16 +69,25 @@ Constraints, each of which has stopped a build:
 
 ## Data pipeline
 
-The app ships a Supabase **publishable** key and acts as `anon`. What that key may do is
-exactly what the app does:
+The app holds no Supabase key; the source is public. Every request goes to the data layer's
+`workset` edge function (data-layer `supabase/functions/workset`) with the device token in
+`X-Device-Token`. The token is `WORKSET_DEVICE_TOKEN` in the gitignored `Config/Secrets.xcconfig`,
+carried into the watch's Info.plist as `WorksetDeviceToken` and read by `DataLayer`. The function
+accepts a token whose SHA-256 is in its `WORKSET_DEVICE_SHA256` secret and acts with the service
+role:
 
-| what | anon may |
+| route | does |
 |---|---|
-| storage bucket `workset-captures` | INSERT `text/csv` at `workset/sensor_capture/<session>/motion.csv`, up to 20 MB. No read, overwrite or delete. |
-| table `workset_reports` | INSERT `reps, occurred_at, session, algorithm`; UPDATE `corrected_reps, deleted` on recent rows |
-| function `workset_watcher()` | call it: the armed exercise and weight, or nulls when nothing is armed |
+| `POST report` | inserts `reps, occurred_at, session, algorithm` into `workset_reports`; answers `[row]` |
+| `PATCH report?id=` | sets `corrected_reps` or `deleted` on a report from the last two hours |
+| `POST watcher` | `workset_watcher()`: the armed exercise and weight, or nulls when nothing is armed |
+| `POST capture?session=` | stores `text/csv` at `workset-captures/workset/sensor_capture/<session>/motion.csv`, up to 20 MB, never overwriting (409) |
 
-Everything else is service-role only. Failed uploads queue on disk and retry, since the gym
+Client keys (anon) have no access to any of it. A new token (another watch, or a rotation) is
+added to the function secret as data-layer's `CLAUDE.md` describes; the build then needs only
+the new `Secrets.xcconfig`.
+
+Failed uploads queue on disk and retry, since the gym
 is exactly where there is no signal; a file leaves the queue only on a 2xx or a 409 (already
 stored).
 
@@ -153,3 +163,4 @@ same rule. Manual entry and repeat have no minimum.
 | 22 | watcher badge reads `workset_watcher()` |
 | 23 | Stop and Discard during a counting pass are no longer undone by it; Swift 6 |
 | 24 | counting passes run on their own queue |
+| 25 | writes go through the `workset` edge function with a device token; no Supabase key in the app |

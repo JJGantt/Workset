@@ -36,8 +36,8 @@ The project, repo, bundle ids and targets are named `Workset`; everything a user
   when the previous one finishes, so cadence follows what the hardware can do.
 - **Feedback.** `Feedback` plays a haptic on every rep, a chime when a set locks on, and
   pre-rendered spoken numbers (`Numbers/n1.wav` to `n50.wav`). See `VOICE.md`.
-- **Reporting.** `SetReporter` posts each finished set (reps, time, algorithm version) to a
-  Supabase table. The exercise and weight are not chosen on the watch: they are armed
+- **Reporting.** `SetReporter` posts each finished set (reps, time, algorithm version) to the
+  data layer's `workset` edge function (`DataLayer`), which stores it as a report. The exercise and weight are not chosen on the watch: they are armed
   elsewhere, and a database trigger attaches them to the report. The watch asks the server
   what is armed so it can show whether sets are being logged, and can correct or remove a
   set it reported.
@@ -55,7 +55,8 @@ xcodebuild -project Workset.xcodeproj -scheme Workset -destination 'generic/plat
 ```
 
 Building needs read access to the counter package, which Swift Package Manager fetches
-over SSH. Release and TestFlight steps are in `STATE.md`.
+over SSH, and `Config/Secrets.xcconfig` (gitignored; copy `Config/Secrets.xcconfig.example`),
+which holds the watch's device token. Without that file the build fails. Release and TestFlight steps are in `STATE.md`.
 
 ## Tests
 
