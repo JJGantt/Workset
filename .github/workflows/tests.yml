@@ -1,0 +1,14 @@
+name: tests
+
+on: [push, pull_request]
+
+jobs:
+  session-core:
+    # SessionCore is the part of the app that builds without the private counter
+    # package, so it is what CI can test.
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: swift test
+        working-directory: Packages/SessionCore
+        run: swift test
