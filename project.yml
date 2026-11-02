@@ -11,7 +11,7 @@ packages:
   # its public surface.
   RepCounter:
     url: git@github.com:JJGantt/Workset-Algorithms.git
-    exactVersion: 1.0.0
+    exactVersion: 1.0.1
 
 settings:
   base:

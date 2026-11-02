@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:JJGantt/Workset-Algorithms.git",
       "state" : {
-        "revision" : "548ae9ab4f03b9988c921acfea132227e8dc27f5",
-        "version" : "1.0.0"
+        "revision" : "90e135316049a5d69c53672f4369e3f62fe59cb1",
+        "version" : "1.0.1"
       }
     }
   ],
