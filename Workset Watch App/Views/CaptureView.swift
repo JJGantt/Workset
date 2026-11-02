@@ -1,5 +1,6 @@
 import SwiftUI
 import RepCounter
+import SessionCore
 
 /// Records a set WITHOUT counting it — how new reference recordings get made.
 ///
@@ -12,7 +13,7 @@ import RepCounter
 /// whole mode silently useless — the thing it exists to produce was never produced.
 struct CaptureView: View {
     @StateObject private var capture = CaptureManager()
-    @State private var armed: (label: String, exercise: String, weight: Double?)?
+    @State private var armed: Armed?
     @State private var uploaded = false
 
     var body: some View {

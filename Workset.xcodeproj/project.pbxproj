@@ -64,6 +64,7 @@
 		A9FCAB0768CE0AA5ADBE4565 /* CaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B65DB418F7BBC5B331B7687 /* CaptureManager.swift */; };
 		AD89D3C216EC9A2D06365DDA /* WatchHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41843E3D3FF34833233598 /* WatchHomeView.swift */; };
 		B3E9D1C1FFCA0E0E0E93591D /* n32.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5410F3AECC68711EA03C2CA8 /* n32.wav */; };
+		B79A499BD706EAC07012C6BE /* SessionCore in Frameworks */ = {isa = PBXBuildFile; productRef = 07B358DAE9DCBC246B6B0FC9 /* SessionCore */; };
 		BA71B6B084080528D51BCF29 /* n40.wav in Resources */ = {isa = PBXBuildFile; fileRef = 93BF5E357FB0BF16C571BA0E /* n40.wav */; };
 		CB70D0FFE1697F0A5EBDECB6 /* PhoneHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E7B9EE940F67A718F0B88 /* PhoneHomeView.swift */; };
 		D123DF23507E8267DC8D52AC /* n34.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6966447CB911C16CF7A61E14 /* n34.wav */; };
@@ -150,6 +151,7 @@
 		99A2CEB649F1708F8C5BF939 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99D5D34FD6D6F542E54A0FD4 /* ActivityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMonitor.swift; sourceTree = "<group>"; };
 		9AAEE3ACAA3B96459508F327 /* SessionCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCounter.swift; sourceTree = "<group>"; };
+		9C73736DB67BF81BBDCD35A2 /* SessionCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SessionCore; path = Packages/SessionCore; sourceTree = SOURCE_ROOT; };
 		9D6E7B9EE940F67A718F0B88 /* PhoneHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneHomeView.swift; sourceTree = "<group>"; };
 		AD4009C249FD51F3B623D5F7 /* n42.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = n42.wav; sourceTree = "<group>"; };
 		AD9F93DCD560D0A87C5F3DEA /* locked.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = locked.wav; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71627BDF34501096F3D1F50E /* RepCounter in Frameworks */,
+				B79A499BD706EAC07012C6BE /* SessionCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +297,14 @@
 			path = Numbers;
 			sourceTree = "<group>";
 		};
+		BAC4CD7409E0002C3E83658F /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				9C73736DB67BF81BBDCD35A2 /* SessionCore */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
 		C6CC90E565CD38EF6F08C6CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +327,7 @@
 		E7EDBC0738AF629FA41035B2 = {
 			isa = PBXGroup;
 			children = (
+				BAC4CD7409E0002C3E83658F /* Packages */,
 				DF189B5FB96CD45E9D720229 /* Workset */,
 				333CC212CFC93B1D627AFE5C /* Workset Watch App */,
 				C6CC90E565CD38EF6F08C6CC /* Products */,
@@ -360,6 +372,7 @@
 			name = "Workset Watch App";
 			packageProductDependencies = (
 				D9B1A2731CB48BC12239302C /* RepCounter */,
+				07B358DAE9DCBC246B6B0FC9 /* SessionCore */,
 			);
 			productName = "Workset Watch App";
 			productReference = 171D46DD0DA9E270AD3FC8F2 /* Workset Watch App.app */;
@@ -394,6 +407,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D216D4038116C614A222656B /* XCRemoteSwiftPackageReference "Workset-Algorithms" */,
+				6F974F14AE478341C53C4C88 /* XCLocalSwiftPackageReference "Packages/SessionCore" */,
 			);
 			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
@@ -620,7 +634,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				WATCHOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Debug;
@@ -702,7 +716,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				WATCHOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Release;
@@ -759,18 +773,29 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		6F974F14AE478341C53C4C88 /* XCLocalSwiftPackageReference "Packages/SessionCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/SessionCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		D216D4038116C614A222656B /* XCRemoteSwiftPackageReference "Workset-Algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:JJGantt/Workset-Algorithms.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.0.1;
+				version = 1.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		07B358DAE9DCBC246B6B0FC9 /* SessionCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SessionCore;
+		};
 		D9B1A2731CB48BC12239302C /* RepCounter */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D216D4038116C614A222656B /* XCRemoteSwiftPackageReference "Workset-Algorithms" */;

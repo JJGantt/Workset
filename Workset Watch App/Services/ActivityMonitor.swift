@@ -1,5 +1,6 @@
 import Foundation
 import CoreMotion
+import os
 
 /// What the OS believes the wearer is doing, sampled alongside the motion stream.
 ///
@@ -11,13 +12,18 @@ import CoreMotion
 /// it. But it may equally misread a rhythmic set AS walking, which would suppress
 /// real sets. So nothing is gated on it yet: it is recorded into every capture, and
 /// what it actually does during real sets decides whether it can be trusted.
+@MainActor
 final class ActivityMonitor {
-    private let manager = CMMotionActivityManager()
-    private let lock = NSLock()
-    private var mask = 0
-    private var confidence = -1
+    struct Reading: Sendable {
+        var mask = 0
+        var confidence = -1
+    }
 
-    static var isAvailable: Bool { CMMotionActivityManager.isActivityAvailable() }
+    private let manager = CMMotionActivityManager()
+    /// Latest verdict. Read from the motion queue, so behind a lock.
+    nonisolated let latest = OSAllocatedUnfairLock(initialState: Reading())
+
+    nonisolated static var isAvailable: Bool { CMMotionActivityManager.isActivityAvailable() }
 
     func start() {
         guard Self.isAvailable else { return }
@@ -33,17 +39,13 @@ final class ActivityMonitor {
             if a.cycling    { m |= 8 }
             if a.automotive { m |= 16 }
             if a.unknown || m == 0 { m |= 32 }
-            self.lock.withLock { self.mask = m; self.confidence = a.confidence.rawValue }
+            let reading = Reading(mask: m, confidence: a.confidence.rawValue)
+            self.latest.withLock { $0 = reading }
         }
     }
 
     func stop() {
         guard Self.isAvailable else { return }
         manager.stopActivityUpdates()
-    }
-
-    /// Latest verdict. Safe from the motion queue.
-    func snapshot() -> (mask: Int, confidence: Int) {
-        lock.withLock { (mask, confidence) }
     }
 }

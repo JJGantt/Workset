@@ -15,14 +15,15 @@ this file is the working detail.
 ## Layout
 
 ```
-Workset Watch App/   capture, workout keep-alive, counting loop, feedback, upload, UI
+Workset Watch App/   capture, workout keep-alive, feedback, upload, UI
+Packages/SessionCore the session loop: pacing, threading, logged sets (tested, see README)
 Workset/             iPhone carrier app (iPhone only; exists to embed the watch app)
 Interface/           RepCounter.swiftinterface, the counter's public surface
 ```
 
 The counter is platform-free and returns events rather than firing haptics, so the logic
-the watch runs is the logic that is tested offline. `SessionCounter` deliberately holds no
-counting decisions of its own.
+the watch runs is the logic that is tested offline. The session loop around it deliberately
+holds no counting decisions of its own; it is tested separately against a scripted counter.
 
 ---
 

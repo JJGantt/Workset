@@ -1,5 +1,6 @@
 import Foundation
 import CoreMotion
+import os
 import RepCounter
 
 /// Records one contiguous set of device motion.
@@ -20,11 +21,9 @@ final class CaptureManager: ObservableObject {
 
     private let motion = CMMotionManager()
     private let queue = OperationQueue()
-    // Written by the motion queue, read by the counting pass, neither on the main
-    // actor. `lock` is what makes that safe, so the isolation is opted out of
-    // explicitly rather than by accident.
-    nonisolated(unsafe) private var samples: [MotionSample] = []
-    private let lock = NSLock()
+    /// Written by the motion queue and drained by the session, so it is behind a lock
+    /// rather than on the main actor.
+    private let samples = OSAllocatedUnfairLock(initialState: [MotionSample]())
     private var ticker: Timer?
     private var startedAt: Date?
 
@@ -51,7 +50,7 @@ final class CaptureManager: ObservableObject {
         await keepAlive.start()
         if let f = keepAlive.lastFailure { lastFailure = f }
 
-        lock.withLock { samples.removeAll() }
+        samples.withLock { $0.removeAll() }
         sampleCount = 0
         quality = nil
         lastFailure = nil
@@ -59,9 +58,25 @@ final class CaptureManager: ObservableObject {
 
         activity.start()
         motion.deviceMotionUpdateInterval = interval
-        motion.startDeviceMotionUpdates(using: .xMagneticNorthZVertical, to: queue) { [weak self] data, error in
-            guard let self, let d = data else { return }
-            let act = self.activity.snapshot()
+        motion.startDeviceMotionUpdates(using: .xMagneticNorthZVertical, to: queue,
+                                        withHandler: Self.recorder(into: samples, activity: activity.latest))
+
+        isRecording = true
+        ticker = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+            Task { @MainActor in self?.tick() }
+        }
+    }
+
+    /// The device-motion handler. Built outside the main actor because CoreMotion calls
+    /// it on the motion queue; a closure formed inside a main-actor method would be
+    /// isolated to the main actor and trap when called from there.
+    private nonisolated static func recorder(
+        into samples: OSAllocatedUnfairLock<[MotionSample]>,
+        activity: OSAllocatedUnfairLock<ActivityMonitor.Reading>
+    ) -> CMDeviceMotionHandler {
+        return { data, _ in
+            guard let d = data else { return }
+            let act = activity.withLock { $0 }
             let s = MotionSample(
                 sensorTime: d.timestamp,
                 userAccel: SIMD3(d.userAcceleration.x, d.userAcceleration.y, d.userAcceleration.z),
@@ -71,12 +86,7 @@ final class CaptureManager: ObservableObject {
                 magAccuracy: Int(d.magneticField.accuracy.rawValue),
                 activityMask: act.mask,
                 activityConfidence: act.confidence)
-            self.lock.withLock { self.samples.append(s) }
-        }
-
-        isRecording = true
-        ticker = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.tick() }
+            samples.withLock { $0.append(s) }
         }
     }
 
@@ -88,17 +98,10 @@ final class CaptureManager: ObservableObject {
         await keepAlive.stop()
         isRecording = false
 
-        let out = lock.withLock { samples }
+        let out = samples.withLock { $0 }
         quality = CaptureQuality.measure(out)
         sampleCount = out.count
         return out
-    }
-
-    /// Everything recorded so far. Safe to call from any thread — the counting pass
-    /// runs off the main actor and needs its own copy, because the motion queue is
-    /// still appending while it works.
-    nonisolated func snapshot() -> [MotionSample] {
-        return lock.withLock { samples }
     }
 
     /// Remove and return everything accumulated since the last call.
@@ -108,15 +111,15 @@ final class CaptureManager: ObservableObject {
     /// the window it needs and drops the rest, so retention is its decision rather
     /// than a side effect of recording.
     nonisolated func drain() -> [MotionSample] {
-        lock.withLock {
-            let out = samples
-            samples.removeAll(keepingCapacity: true)
+        samples.withLock {
+            let out = $0
+            $0.removeAll(keepingCapacity: true)
             return out
         }
     }
 
     private func tick() {
-        let n = lock.withLock { samples.count }
+        let n = samples.withLock { $0.count }
         sampleCount = n
         if let s = startedAt { elapsed = Date().timeIntervalSince(s) }
     }

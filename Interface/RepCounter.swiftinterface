@@ -12,7 +12,7 @@ public enum AlgorithmVersion {
 public enum CaptureFormat {
   public static func csv(_ samples: [RepCounter.MotionSample], session: Swift.String, verdict: RepCounter.CountedSet?, exercise: Swift.String? = nil, weightLbs: Swift.Double? = nil, cancelled: Swift.Bool = false) -> Swift.String
 }
-public struct MotionSample {
+public struct MotionSample : Swift.Sendable {
   public let sensorTime: Foundation.TimeInterval
   public let userAccel: Swift.SIMD3<Swift.Double>
   public let rotationRate: Swift.SIMD3<Swift.Double>
@@ -23,7 +23,7 @@ public struct MotionSample {
   public var activityConfidence: Swift.Int
   public init(sensorTime: Foundation.TimeInterval, userAccel: Swift.SIMD3<Swift.Double>, rotationRate: Swift.SIMD3<Swift.Double>, gravity: Swift.SIMD3<Swift.Double>, attitude: Swift.SIMD3<Swift.Double>, magAccuracy: Swift.Int, activityMask: Swift.Int = 0, activityConfidence: Swift.Int = -1)
 }
-public struct CaptureQuality {
+public struct CaptureQuality : Swift.Sendable {
   public let spanSeconds: Swift.Double
   public let coveredSeconds: Swift.Double
   public let maxGapSeconds: Swift.Double
@@ -39,7 +39,7 @@ public struct CaptureQuality {
   }
   public static func measure(_ motion: [RepCounter.MotionSample]) -> RepCounter.CaptureQuality
 }
-public struct CountedSet {
+public struct CountedSet : Swift.Sendable {
   public let count: Swift.Int
   public let startedAt: Swift.Double
   public let endedAt: Swift.Double
@@ -53,9 +53,9 @@ public struct CountedSet {
   }
   public init(count: Swift.Int, startedAt: Swift.Double, endedAt: Swift.Double, seedSpread: Swift.Double, travelCm: Swift.Double, repEnds: [Swift.Double], repFired: [Swift.Double], algorithm: Swift.String)
 }
-public struct SessionMachine {
+public struct SessionMachine : Swift.Sendable {
   public init()
-  public enum Phase {
+  public enum Phase : Swift.Sendable {
     case armed, counting
     public static func == (a: RepCounter.SessionMachine.Phase, b: RepCounter.SessionMachine.Phase) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
@@ -63,7 +63,7 @@ public struct SessionMachine {
       get
     }
   }
-  public enum Event {
+  public enum Event : Swift.Sendable {
     case committed(Swift.Int)
     case reps(Swift.Int)
     case closed(RepCounter.CountedSet, [RepCounter.MotionSample])

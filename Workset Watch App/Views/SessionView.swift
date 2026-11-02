@@ -7,7 +7,7 @@ import SwiftUI
 /// next, which may be a completely different exercise.
 struct SessionView: View {
     @StateObject private var capture = CaptureManager()
-    @StateObject private var session = SessionCounter()
+    @StateObject private var session = SessionCounter.live()
     @State private var showManual = false
 
     var body: some View {
@@ -98,7 +98,7 @@ struct SessionView: View {
             // Reject THIS set without switching the session off. Turning the session
             // off and on again was the only way to do it before, and that clears the
             // list of sets already done.
-            Button("Discard set") { session.cancelCurrent() }
+            Button("Discard set") { Task { await session.cancelCurrent() } }
                 .tint(.orange)
                 .font(.caption)
             stopButton
@@ -118,7 +118,7 @@ struct SessionView: View {
     private var stopButton: some View {
         Button("Stop") {
             Task {
-                session.end()
+                await session.end()
                 _ = await capture.stop()
             }
         }

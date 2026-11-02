@@ -1,4 +1,5 @@
 import Foundation
+import SessionCore
 
 /// Reports a counted set to the data layer, and amends it afterwards.
 ///
@@ -33,7 +34,7 @@ enum SetReporter {
     /// Report a finished set. Hands back the report id so the count can be corrected
     /// or the set removed from the wrist.
     static func report(reps: Int, at: Date, session: String, algorithm: String,
-                       then: @escaping (Int?) -> Void) {
+                       then: @escaping @Sendable (Int?) -> Void) {
         let iso = ISO8601DateFormatter()
         iso.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         let body: [String: Any] = ["reps": reps,
@@ -73,8 +74,7 @@ enum SetReporter {
     /// with no route to the network is indistinguishable from a watcher that was never
     /// armed — both produce nil, both read "not logging", and the lifter has no way to
     /// tell "arm it" from "your watch is offline". Those need different reactions.
-    static func armedExercise(then: @escaping ((label: String, exercise: String, weight: Double?)?,
-                                               _ reachable: Bool) -> Void) {
+    static func armedExercise(then: @escaping @Sendable (Armed?, _ reachable: Bool) -> Void) {
         // The server decides armed-ness (set_watcher_is_armed: ten minutes with no set
         // disarms it) and returns nulls when nothing is armed. The publishable key has no
         // access to the watcher table itself.
@@ -90,7 +90,7 @@ enum SetReporter {
             // Bodyweight reads as "bodyweight", not "0 lb" — matching the hub.
             let w = row["weight_lbs"] as? Double
             let label = w.map { $0 == 0 ? "\(ex) · bodyweight" : "\(ex) · \(Int($0)) lb" } ?? ex
-            then((label: label, exercise: ex, weight: w), true)
+            then(Armed(label: label, exercise: ex, weight: w), true)
         }.resume()
     }
 }

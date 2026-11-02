@@ -1,13 +1,13 @@
 {
-  "originHash" : "1508e3f1285b8ca8b09ea007af33610f9d2e16349cc75a3b5da47b7194846861",
+  "originHash" : "1183fd5f4a7823abdcf50bdb0f9baa48cc18e4ad3b9b2d362a95dcd3370d1c0b",
   "pins" : [
     {
       "identity" : "workset-algorithms",
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:JJGantt/Workset-Algorithms.git",
       "state" : {
-        "revision" : "90e135316049a5d69c53672f4369e3f62fe59cb1",
-        "version" : "1.0.1"
+        "revision" : "c22c9a96932c178e7b4e1d8776ff40f219bd6e18",
+        "version" : "1.1.0"
       }
     }
   ],

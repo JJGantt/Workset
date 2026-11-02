@@ -14,9 +14,10 @@ import WatchKit
 @MainActor
 final class Feedback {
 
-    /// The set was recognised. This lands at three reps, and it announces all three
-    /// at once, so it has to be clearly distinct from a single rep tick — otherwise
-    /// there is no way to tell "that was your third" from "that was one more".
+    /// The set was recognised. This lands with several reps already counted and
+    /// announces them at once, so it has to be clearly distinct from a single rep
+    /// tick — otherwise there is no way to tell "that was the first count" from "that
+    /// was one more".
     /// Two rising notes against the rep tick's single blip.
     func locked() {
         WKInterfaceDevice.current().play(.success)
