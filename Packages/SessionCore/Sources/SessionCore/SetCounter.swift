@@ -54,6 +54,11 @@ actor CounterBox<C: SetCounter> {
     private var counter: C
     private var seq = 0
 
+    /// A pass is long synchronous work, so the box runs on its own queue rather than
+    /// holding one of the concurrency pool's few threads for the length of it.
+    private let queue = DispatchSerialQueue(label: "SessionCore.counter", qos: .userInitiated)
+    nonisolated var unownedExecutor: UnownedSerialExecutor { queue.asUnownedSerialExecutor() }
+
     init(_ counter: C) { self.counter = counter }
 
     private func state() -> State {
