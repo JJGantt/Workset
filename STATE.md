@@ -150,3 +150,5 @@ same rule. Manual entry and repeat have no minimum.
 | 18 | set end detection |
 | 19-20 | manual entry, discard, repeat |
 | 21 | minimum set length |
+| 22 | watcher badge reads `workset_watcher()` |
+| 23 | Stop and Discard during a counting pass are no longer undone by it; Swift 6 |
