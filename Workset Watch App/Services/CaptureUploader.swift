@@ -12,13 +12,6 @@ import RepCounter
 /// no modification.
 enum CaptureUploader {
 
-    private static let base = "https://felyggqjjhltwokdfhop.supabase.co"
-    private static let bucket = "workset-captures"
-    /// Publishable key: designed to be shipped. Storage RLS lets it CREATE objects
-    /// in this bucket and nothing else — it cannot read back what was recorded, or
-    /// overwrite it, or delete it. Reading is service-role only.
-    static let publishableKey = "sb_publishable_H2P7Gl1d_bGngnilIlBDsg_Bvkp_Uae"
-
     /// Sets that could not be uploaded yet. The gym is exactly where the watch has
     /// no useful connection, so a failed upload queues on disk and is retried rather
     /// than dropped — losing the recording defeats the point of making it.
@@ -54,14 +47,10 @@ enum CaptureUploader {
         for f in files where f.pathExtension == "csv" {
             guard let body = try? Data(contentsOf: f) else { continue }
             let session = f.deletingPathExtension().lastPathComponent
-            let path = "\(bucket)/workset/sensor_capture/\(session)/motion.csv"
-            guard let url = URL(string: "\(base)/storage/v1/object/\(path)") else { continue }
-            var req = URLRequest(url: url)
-            req.httpMethod = "POST"
-            req.setValue(publishableKey, forHTTPHeaderField: "apikey")
-            req.setValue("Bearer \(publishableKey)", forHTTPHeaderField: "Authorization")
-            req.setValue("text/csv", forHTTPHeaderField: "Content-Type")
-            req.httpBody = body
+            // The function stores it at workset/sensor_capture/<session>/motion.csv in the
+            // workset-captures bucket, never overwriting.
+            guard let req = DataLayer.request("capture?session=\(session)", "POST",
+                                              contentType: "text/csv", body: body) else { continue }
             URLSession.shared.dataTask(with: req) { _, resp, _ in
                 let code = (resp as? HTTPURLResponse)?.statusCode ?? 0
                 // 409 means this session is already stored — also a reason to stop

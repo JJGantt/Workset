@@ -6,3 +6,4 @@ xcuserdata/
 __pycache__/
 .build/
 .swiftpm/
+Config/Secrets.xcconfig

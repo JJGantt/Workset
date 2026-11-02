@@ -22,7 +22,7 @@ settings:
     DEVELOPMENT_TEAM: XMH4AVFC78
     SWIFT_VERSION: "6.0"
     MARKETING_VERSION: "1.0"
-    CURRENT_PROJECT_VERSION: "24"
+    CURRENT_PROJECT_VERSION: "25"
     GENERATE_INFOPLIST_FILE: YES
 
 targets:
@@ -62,6 +62,20 @@ targets:
     platform: watchOS
     sources:
       - "Workset Watch App"
+    # The device token the watch sends to the data layer. Config/Secrets.xcconfig is gitignored
+    # (copy Config/Secrets.xcconfig.example); a build without it fails rather than ship a watch
+    # that cannot log a set.
+    configFiles:
+      Debug: Config/Secrets.xcconfig
+      Release: Config/Secrets.xcconfig
+    info:
+      path: "Workset Watch App/Info.plist"
+      properties:
+        WorksetDeviceToken: $(WORKSET_DEVICE_TOKEN)
+        # XcodeGen writes literal versions into a plist it generates; these keep the build
+        # settings in charge, as they are for the phone target's generated plist.
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
     dependencies:
       - package: RepCounter
       - package: SessionCore
