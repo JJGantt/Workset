@@ -43,6 +43,13 @@ xcodebuild -exportArchive -archivePath /tmp/W.xcarchive -exportPath /tmp/export 
 xcrun altool --upload-app -f /tmp/export/Workset.ipa -t ios --apiKey <key id> --apiIssuer <issuer id>
 ```
 
+The same build runs on a GitHub-hosted Mac when this one is away: `.github/workflows/testflight.yml`,
+started with `gh workflow run testflight.yml -R JJGantt/Workset` or an `ios-*` tag, from any machine.
+It takes the build number from `project.yml` like the steps above, so bump and push first. Its
+secrets: the signing certificates and API key (`IOS_DIST_P12`, `IOS_DEV_P12`, their `_PASSWORD`s,
+`ASC_KEY_P8`), `WORKSET_SECRETS_XCCONFIG` (the whole `Config/Secrets.xcconfig`), and
+`WORKSET_ALGORITHMS_DEPLOY_KEY`, the private half of a read-only deploy key on Workset-Algorithms.
+
 **A build must then be attached to a beta group or it is invisible in TestFlight.**
 
 Constraints, each of which has stopped a build:
