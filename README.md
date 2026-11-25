@@ -1,5 +1,9 @@
 # Watchset
 
+**Not built any more.** The watch feature runs as a page of the Status Hub watch app, from the
+package `apps/Packages/Watchset` in JJGantt/status-hub (SessionCore beside it), because one app on the
+watch can hold a workout session at a time. This repository is the standalone app it came from.
+
 An Apple Watch app that counts weightlifting reps from wrist motion. One switch covers the
 whole workout: the watch streams device motion continuously, recognises a set when one
 starts, counts it live with a haptic and a spoken number per rep, closes it when it ends,
